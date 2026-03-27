@@ -1,172 +1,69 @@
 <!-- ========================================
   RARE STACKED IMAGE SECTION
   ======================================== -->
-{%- comment -%}
-  Build a JS array of all gallery images for Level 3 switcher.
-  We collect image_3, image_3b, image_3c (up to 5 extras configurable).
-  Only include images that are actually set.
-{%- endcomment -%}
-
-{%- assign l3_images = '' | split: '' -%}
-{%- if section.settings.image_3 != blank -%}
-  {%- assign l3_images = l3_images | append: section.settings.image_3 | split: '||' -%}
-{%- endif -%}
-
 <section id="rareImageGrid" class="rare-image-grid">
   <div class="image-grid-main">
+
+    {% comment %} <!-- Level 1 -->
+    <div class="image-level image-level-1">
+      <div class="image-grid-item full-image-item">
+        {%- if section.settings.image_1 != blank -%}
+          <img
+            src="{{ section.settings.image_1 | image_url: width: 1600 }}"
+            alt="Level 1 Image"
+            width="1600"
+            height="900"
+            loading="lazy"
+          >
+        {%- endif -%}
+      </div>
+    </div> {% endcomment %}
 
     <!-- Level 2 -->
     <div class="image-level image-level-2">
       <div class="image-grid-item level-2-image">
         {%- if section.settings.image_2 != blank -%}
           <img
-            src="{{ section.settings.image_2 | image_url: width: 1600 }}"
-            alt="{{ section.settings.image_2.alt | escape | default: 'Level 2 Image' }}"
-            width="1600"
+            src="{{ section.settings.image_2 | image_url: width: 1200 }}"
+            alt="Level 2 Image"
+            width="1200"
             height="900"
             loading="lazy"
           >
-        {%- else -%}
-          {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
         {%- endif -%}
       </div>
+
+      {% comment %} <div class="image-grid-item level-2-content">
+        <div class="level-2-content-inner">
+          <p>{{ section.settings.overlay_text }}</p>
+
+          {%- if section.settings.overlay_button_label != blank -%}
+            <a
+              href="{{ section.settings.overlay_button_link | default: '#' }}"
+              class="image-grid-overlay-button">
+              {{ section.settings.overlay_button_label }}
+            </a>
+          {%- endif -%}
+        </div>
+      </div> {% endcomment %}
     </div>
 
-    <!-- Level 3 — Dynamic Image Switcher -->
+    <!-- Level 3 -->
     <div class="image-level image-level-3">
       <div class="level-3-section-wrap">
 
         <div class="image-grid-item level-3-image">
-
-          <!-- Main display image -->
-          <div class="level-3-main-img-wrap">
-            {%- if section.settings.image_3 != blank -%}
-              <img
-                id="l3MainImg"
-                class="l3-main-img"
-                src="{{ section.settings.image_3 | image_url: width: 1200 }}"
-                alt="{{ section.settings.image_3.alt | escape | default: 'Level 3 Image' }}"
-                width="1200"
-                height="1200"
-                loading="lazy"
-              >
-            {%- else -%}
-              {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
-            {%- endif -%}
-          </div>
-
-          <!-- Thumbnail strip: show only if at least 2 gallery images are set -->
-          {%- assign thumb_count = 0 -%}
-          {%- if section.settings.image_3 != blank -%}{%- assign thumb_count = thumb_count | plus: 1 -%}{%- endif -%}
-          {%- if section.settings.image_3b != blank -%}{%- assign thumb_count = thumb_count | plus: 1 -%}{%- endif -%}
-          {%- if section.settings.image_3c != blank -%}{%- assign thumb_count = thumb_count | plus: 1 -%}{%- endif -%}
-          {%- if section.settings.image_3d != blank -%}{%- assign thumb_count = thumb_count | plus: 1 -%}{%- endif -%}
-          {%- if section.settings.image_3e != blank -%}{%- assign thumb_count = thumb_count | plus: 1 -%}{%- endif -%}
-
-          {%- if thumb_count >= 2 -%}
-          <div class="level-3-thumbs" id="l3Thumbs">
-
-            {%- if section.settings.image_3 != blank -%}
-            <div
-              class="l3-thumb active"
-              data-full="{{ section.settings.image_3 | image_url: width: 1200 }}"
-              data-alt="{{ section.settings.image_3.alt | escape | default: 'Image 1' }}"
-              role="button"
-              tabindex="0"
-              aria-label="View image 1"
+          {%- if section.settings.image_3 != blank -%}
+            <img
+              src="{{ section.settings.image_3 | image_url: width: 1200 }}"
+              alt="Level 3 Image"
+              width="1200"
+              height="1200"
+              loading="lazy"
             >
-              <img
-                src="{{ section.settings.image_3 | image_url: width: 160 }}"
-                alt="{{ section.settings.image_3.alt | escape | default: 'Thumbnail 1' }}"
-                width="160"
-                height="160"
-                loading="lazy"
-              >
-            </div>
-            {%- endif -%}
-
-            {%- if section.settings.image_3b != blank -%}
-            <div
-              class="l3-thumb"
-              data-full="{{ section.settings.image_3b | image_url: width: 1200 }}"
-              data-alt="{{ section.settings.image_3b.alt | escape | default: 'Image 2' }}"
-              role="button"
-              tabindex="0"
-              aria-label="View image 2"
-            >
-              <img
-                src="{{ section.settings.image_3b | image_url: width: 160 }}"
-                alt="{{ section.settings.image_3b.alt | escape | default: 'Thumbnail 2' }}"
-                width="160"
-                height="160"
-                loading="lazy"
-              >
-            </div>
-            {%- endif -%}
-
-            {%- if section.settings.image_3c != blank -%}
-            <div
-              class="l3-thumb"
-              data-full="{{ section.settings.image_3c | image_url: width: 1200 }}"
-              data-alt="{{ section.settings.image_3c.alt | escape | default: 'Image 3' }}"
-              role="button"
-              tabindex="0"
-              aria-label="View image 3"
-            >
-              <img
-                src="{{ section.settings.image_3c | image_url: width: 160 }}"
-                alt="{{ section.settings.image_3c.alt | escape | default: 'Thumbnail 3' }}"
-                width="160"
-                height="160"
-                loading="lazy"
-              >
-            </div>
-            {%- endif -%}
-
-            {%- if section.settings.image_3d != blank -%}
-            <div
-              class="l3-thumb"
-              data-full="{{ section.settings.image_3d | image_url: width: 1200 }}"
-              data-alt="{{ section.settings.image_3d.alt | escape | default: 'Image 4' }}"
-              role="button"
-              tabindex="0"
-              aria-label="View image 4"
-            >
-              <img
-                src="{{ section.settings.image_3d | image_url: width: 160 }}"
-                alt="{{ section.settings.image_3d.alt | escape | default: 'Thumbnail 4' }}"
-                width="160"
-                height="160"
-                loading="lazy"
-              >
-            </div>
-            {%- endif -%}
-
-            {%- if section.settings.image_3e != blank -%}
-            <div
-              class="l3-thumb"
-              data-full="{{ section.settings.image_3e | image_url: width: 1200 }}"
-              data-alt="{{ section.settings.image_3e.alt | escape | default: 'Image 5' }}"
-              role="button"
-              tabindex="0"
-              aria-label="View image 5"
-            >
-              <img
-                src="{{ section.settings.image_3e | image_url: width: 160 }}"
-                alt="{{ section.settings.image_3e.alt | escape | default: 'Thumbnail 5' }}"
-                width="160"
-                height="160"
-                loading="lazy"
-              >
-            </div>
-            {%- endif -%}
-
-          </div>
           {%- endif -%}
-
         </div>
 
-        <!-- Content -->
         <div class="image-grid-item level-3-content">
           <div class="level-3-content-inner">
             <p>{{ section.settings.level_3_text }}</p>
@@ -184,40 +81,38 @@
       </div>
     </div>
 
-    <!-- Level 4 — Image 4 -->
+    <!-- Level 4 -->
     <div class="image-level image-level-4">
       <div class="image-grid-item full-image-item">
         {%- if section.settings.image_4 != blank -%}
           <img
             src="{{ section.settings.image_4 | image_url: width: 1600 }}"
-            alt="{{ section.settings.image_4.alt | escape | default: 'Level 4 Image' }}"
+            alt="Level 4 Image"
             width="1600"
             height="900"
             loading="lazy"
           >
-        {%- else -%}
-          {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+        {%- endif -%}
+      </div>
+    </div>
+    <!-- Level 4 -->
+    <div class="image-level image-level-4">
+      <div class="image-grid-item full-image-item">
+        {%- if section.settings.image_5 != blank -%}
+          <img
+            src="{{ section.settings.image_5 | image_url: width: 1600 }}"
+            alt="Level 4 Image"
+            width="1600"
+            height="900"
+            loading="lazy"
+          >
         {%- endif -%}
       </div>
     </div>
 
-    <!-- Level 4 — Image 5 -->
-    {%- if section.settings.image_5 != blank -%}
-    <div class="image-level image-level-4">
-      <div class="image-grid-item full-image-item">
-        <img
-          src="{{ section.settings.image_5 | image_url: width: 1600 }}"
-          alt="{{ section.settings.image_5.alt | escape | default: 'Level 5 Image' }}"
-          width="1600"
-          height="900"
-          loading="lazy"
-        >
-      </div>
-    </div>
-    {%- endif -%}
-
   </div>
 </section>
+
 
 
 {% schema %}
@@ -225,8 +120,9 @@
   "name": "Rare Image Stack",
   "settings": [
     {
-      "type": "header",
-      "content": "Level 2 — Full Width Image"
+      "type": "image_picker",
+      "id": "image_1",
+      "label": "Level 1 Image"
     },
     {
       "type": "image_picker",
@@ -234,58 +130,9 @@
       "label": "Level 2 Image"
     },
     {
-      "type": "header",
-      "content": "Level 3 — Image Gallery + Content"
-    },
-    {
-      "type": "paragraph",
-      "content": "Add up to 5 images. When 2 or more are set, thumbnails appear automatically and clicking switches the main image."
-    },
-    {
       "type": "image_picker",
       "id": "image_3",
-      "label": "Gallery Image 1 (main / default)"
-    },
-    {
-      "type": "image_picker",
-      "id": "image_3b",
-      "label": "Gallery Image 2"
-    },
-    {
-      "type": "image_picker",
-      "id": "image_3c",
-      "label": "Gallery Image 3"
-    },
-    {
-      "type": "image_picker",
-      "id": "image_3d",
-      "label": "Gallery Image 4"
-    },
-    {
-      "type": "image_picker",
-      "id": "image_3e",
-      "label": "Gallery Image 5"
-    },
-    {
-      "type": "text",
-      "id": "level_3_text",
-      "label": "Level 3 Heading Text",
-      "default": "OWN THE FIRST RARE TRAVEL DROP"
-    },
-    {
-      "type": "text",
-      "id": "level_3_button_label",
-      "label": "Level 3 Button Label",
-      "default": "Shop Now"
-    },
-    {
-      "type": "url",
-      "id": "level_3_button_link",
-      "label": "Level 3 Button Link"
-    },
-    {
-      "type": "header",
-      "content": "Level 4 — Full Width Images"
+      "label": "Level 3 Image"
     },
     {
       "type": "image_picker",
@@ -295,33 +142,41 @@
     {
       "type": "image_picker",
       "id": "image_5",
-      "label": "Level 5 Image (optional)"
-    },
-    {
-      "type": "header",
-      "content": "Legacy / Unused Settings (kept for compatibility)"
-    },
-    {
-      "type": "image_picker",
-      "id": "image_1",
-      "label": "Level 1 Image (commented out)"
+      "label": "Level 5 Image"
     },
     {
       "type": "text",
       "id": "overlay_text",
-      "label": "Level 2 Overlay Text (commented out)",
+      "label": "Level 2 Text",
       "default": "OWN THE FIRST RARE TRAVEL DROP"
     },
     {
       "type": "text",
       "id": "overlay_button_label",
-      "label": "Level 2 Button Label (commented out)",
+      "label": "Level 2 Button Label",
       "default": "Prebook Now"
     },
     {
       "type": "url",
       "id": "overlay_button_link",
-      "label": "Level 2 Button Link (commented out)"
+      "label": "Level 2 Button Link"
+    },
+    {
+      "type": "text",
+      "id": "level_3_text",
+      "label": "Level 3 Text",
+      "default": "OWN THE FIRST RARE TRAVEL DROP"
+    },
+    {
+      "type": "text",
+      "id": "level_3_button_label",
+      "label": "Level 3 Button Label",
+      "default": "Shop now"
+    },
+    {
+      "type": "url",
+      "id": "level_3_button_link",
+      "label": "Level 3 Button Link"
     }
   ],
   "presets": [

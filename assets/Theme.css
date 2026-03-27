@@ -344,7 +344,7 @@ a {
     justify-content: center;
   }
 
-.delivery-bar-inner {
+  .delivery-bar-inner {
     padding: 10px 18px;
   }
 
@@ -748,7 +748,9 @@ a {
   .footer-col__body {
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.35s ease, padding 0.35s ease;
+    transition:
+      max-height 0.35s ease,
+      padding 0.35s ease;
     padding-bottom: 0;
   }
 
@@ -862,8 +864,6 @@ a {
     gap: 14px;
     font-size: 11px;
   }
-
- 
 }
 
 @media (max-width: 992px) {
@@ -1023,9 +1023,11 @@ a {
   display: none;
 }
 
-.upercontent-mobile {}
+.upercontent-mobile {
+}
 
-.lowercontent-mobile {}
+.lowercontent-mobile {
+}
 
 /* Button */
 .hero-button {
@@ -1041,7 +1043,9 @@ a {
   font-weight: 600;
   line-height: 1;
   text-decoration: none;
-  transition: transform 0.2s ease, opacity 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease;
 }
 
 .hero-button:hover {
@@ -1306,7 +1310,6 @@ a {
 }
 
 @media (max-width: 992px) {
-
   .hero-upper,
   .hero-image {
     height: 50vh;
@@ -1426,7 +1429,6 @@ a {
     font-size: 0.8rem;
     font-weight: 400;
     letter-spacing: 1px;
-    
   }
 
   .upercontent-mobile h1 {
@@ -1606,39 +1608,50 @@ a {
   }
 }
 
-/* =========================
-   LUGGAGE SHOWCASE SECTION
-========================= */
-
+/*
+   ========================= 
+   BASE 
+   =========================
+*/
 .rare-luggage-showcase {
   width: 100%;
-  background: #f3f3f3;
-  padding: 20px 0 30px;
+  background: #f0f0f0;
+  padding: 28px 0 40px;
 }
 
 .rare-luggage-showcase__wrapper {
-  width: 65%;
-  max-width: 1120px;
+  width: 62%;
+  max-width: 1080px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 24px;
-
+  gap: 22px;
 }
 
+/*
+   ========================= 
+   CARD 
+   =========================
+*/
 .luggage-card {
   display: grid;
-  grid-template-columns: 1.05fr 1fr;
-  gap: 22px;
-  background: #ececec;
+  grid-template-columns: 1.08fr 1fr;
+  gap: 24px;
+  background: #e8e8e8;
   border-radius: 20px;
   padding: 22px;
-  align-items: center;
+  align-items: start;
 }
 
+/*
+   ========================= 
+   MEDIA 
+   =========================
+*/
 .luggage-card__media {
-  background: #dcdcdc;
-  border-radius: 16px;
+  position: relative;
+  background: #d8d8d8;
+  border-radius: 14px;
   overflow: hidden;
   min-height: 360px;
   display: flex;
@@ -1646,345 +1659,431 @@ a {
   justify-content: center;
 }
 
-.luggage-card__media img,
-.luggage-card__media .placeholder-svg {
+.luggage-card__main-img {
   width: 100%;
   height: 100%;
   object-fit: contain;
+  display: block;
+  transition: opacity 0.25s ease;
 }
 
+.luggage-card__main-img.lc-fading {
+  opacity: 0;
+}
+
+/* Arrows */
+.luggage-card__arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 32px;
+  height: 32px;
+  background: rgba(255, 255, 255, 0.72);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  color: #111;
+  z-index: 2;
+  transition: background 0.18s;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  line-height: 1;
+  padding: 0;
+}
+
+.luggage-card__arrow:hover {
+  background: #fff;
+}
+.luggage-card__arrow--prev {
+  left: 10px;
+}
+.luggage-card__arrow--next {
+  right: 10px;
+}
+
+/*
+   ========================= 
+   CONTENT 
+   =========================
+*/
 .luggage-card__content {
   display: flex;
   flex-direction: column;
-  gap: 14px;
-  padding-right: 8px;
+  gap: 13px;
+  padding-top: 4px;
 }
 
-.luggage-card__header {
+/* Color row */
+.luggage-card__color-row {
   display: flex;
-  flex-direction: column;
-  gap: 4px;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 5px;
 }
 
+.luggage-color-label,
+.luggage-color-value {
+  font-size: 0.74rem;
+  color: #6a6a6a;
+  font-family: inherit;
+}
+
+.luggage-color-value {
+  color: #2b2b2b;
+}
+
+/* Header */
 .luggage-card__header h2 {
-  margin: 0;
-  font-size: 2rem;
+  margin: 0 0 5px;
+  font-size: 2.1rem;
   line-height: 1;
-  font-weight: 500;
+  font-weight: 600;
   color: #111;
-  letter-spacing: 0.3px;
+  letter-spacing: 1.5px;
   text-transform: uppercase;
 }
 
 .luggage-card__header p {
   margin: 0;
-  font-size: 0.92rem;
+  font-size: 0.84rem;
   line-height: 1.45;
-  color: #4b4b4b;
-  max-width: 420px;
+  color: #4a4a4a;
 }
 
+/* Option group */
 .luggage-card__option-group {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 7px;
 }
 
 .option-label {
-  margin: 0;
-  font-size: 0.8rem;
+  font-size: 0.76rem;
   font-weight: 500;
   color: #111;
 }
 
-.option-values {
+/* Size header row */
+.luggage-size-header {
   display: flex;
   align-items: center;
-  flex-wrap: wrap;
-  gap: 8px;
+  justify-content: space-between;
 }
 
-.option-values span {
-  font-size: 0.82rem;
+.size-chart-link {
+  font-size: 0.7rem;
   color: #2b2b2b;
+  text-decoration: underline;
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-family: inherit;
+  padding: 0;
 }
 
+/*
+   ========================= 
+   THUMBNAILS 
+   =========================
+*/
 .luggage-card__thumbnails {
   display: flex;
-  align-items: center;
-  gap: 10px;
+  gap: 8px;
   flex-wrap: wrap;
 }
 
-.thumbnail-item {
-  width: 64px;
-  height: 78px;
-  border: 1px solid #c9c9c9;
-  border-radius: 6px;
-  background: #f8f8f8;
+.luggage-thumb {
+  width: 62px;
+  height: 74px;
+  border: 1.5px solid #c0c0c0;
+  border-radius: 8px;
+  background: #f2f2f2;
   overflow: hidden;
+  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
+  transition:
+    border-color 0.18s,
+    box-shadow 0.18s;
+  flex-shrink: 0;
 }
 
-.thumbnail-item img {
+.luggage-thumb img {
   width: 100%;
   height: 100%;
   object-fit: contain;
+  display: block;
+  pointer-events: none;
 }
 
-.size-options {
+.luggage-thumb:hover {
+  border-color: #888;
+}
+
+.luggage-thumb.active {
+  border-color: #111;
+  box-shadow: 0 0 0 1px #111;
+}
+
+/*
+   ========================= 
+   SIZE PILLS 
+   =========================
+*/
+.luggage-size-options {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 7px;
 }
 
-.size-pill {
+.luggage-size-pill {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 28px;
-  padding: 6px 14px;
-  border: 1px solid #1e1e1e;
+  height: 28px;
+  padding: 0 13px;
+  border: 1px solid #1a1a1a;
   border-radius: 999px;
   background: transparent;
   color: #1a1a1a;
-  font-size: 0.72rem;
-  line-height: 1;
+  font-size: 0.7rem;
+  font-family: inherit;
+  cursor: pointer;
   white-space: nowrap;
+  transition:
+    background 0.16s,
+    color 0.16s;
+  user-select: none;
 }
 
+.luggage-size-pill:hover {
+  background: rgba(0, 0, 0, 0.06);
+}
+
+.luggage-size-pill.active {
+  background: #111;
+  color: #fff;
+  border-color: #111;
+}
+
+/*
+   ========================= 
+   PRICE 
+   =========================
+*/
 .luggage-card__price {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 3px;
 }
 
-.luggage-card__price h3 {
-  margin: 0;
-  font-size: 1.5rem;
-  line-height: 1;
+.luggage-price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.luggage-price-main {
+  font-size: 1.45rem;
   font-weight: 700;
   color: #111;
+  line-height: 1;
 }
 
-.luggage-card__price p {
+.luggage-price-old {
+  font-size: 0.8rem;
+  color: #7a7a7a;
+  text-decoration: line-through;
+}
+
+.luggage-price-note {
   margin: 0;
-  font-size: 0.72rem;
-  color: #7b7b7b;
-  line-height: 1.35;
+  font-size: 0.68rem;
+  color: #7a7a7a;
+  line-height: 1.4;
 }
 
+/*
+   ========================= 
+   BUTTONS 
+   =========================
+*/
 .luggage-card__actions {
   display: flex;
-  align-items: center;
-  gap: 12px;
+  gap: 10px;
   flex-wrap: wrap;
+  align-items: center;
 }
 
 .luggage-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 165px;
   min-height: 42px;
-  padding: 10px 20px;
-  border-radius: 0;
-  font-size: 0.88rem;
+  padding: 0 22px;
+  font-size: 0.84rem;
   font-weight: 500;
-  line-height: 1;
-  transition: all 0.2s ease;
+  font-family: inherit;
+  border-radius: 0;
+  cursor: pointer;
+  text-decoration: none;
+  transition:
+    background 0.18s,
+    color 0.18s;
+  border: 1px solid #111;
+  white-space: nowrap;
+  letter-spacing: 0.2px;
+  flex: 1;
+  min-width: 120px;
+  text-align: center;
 }
 
 .luggage-btn--primary {
-  background: #000;
+  background: #111;
   color: #fff;
-  border: 1px solid #000;
+}
+
+.luggage-btn--primary:hover {
+  background: #2a2a2a;
+  color: #fff;
 }
 
 .luggage-btn--secondary {
   background: transparent;
-  color: #000;
-  border: 1px solid #000;
-}
-
-.luggage-btn--primary:hover {
-  background: #1b1b1b;
+  color: #111;
 }
 
 .luggage-btn--secondary:hover {
-  background: #000;
+  background: #111;
   color: #fff;
 }
 
-/* =========================
-   RESPONSIVE
-========================= */
-
-@media (max-width: 1200px) {
-  .rare-luggage-showcase {
-    padding: 18px 18px 28px;
+/*
+   ========================= 
+   RESPONSIVE 
+   =========================
+*/
+@media (max-width: 1280px) {
+  .rare-luggage-showcase__wrapper {
+    width: 72%;
   }
+}
 
+@media (max-width: 1024px) {
+  .rare-luggage-showcase__wrapper {
+    width: 86%;
+  }
   .luggage-card {
-    grid-template-columns: 1fr 1fr;
     gap: 18px;
     padding: 18px;
   }
-
   .luggage-card__media {
-    min-height: 320px;
+    min-height: 310px;
   }
-
   .luggage-card__header h2 {
-    font-size: 1.7rem;
-  }
-
-  .luggage-btn {
-    min-width: 150px;
+    font-size: 1.8rem;
   }
 }
 
-@media (max-width: 992px) {
+@media (max-width: 860px) {
   .rare-luggage-showcase__wrapper {
-    gap: 20px;
+    width: 90%;
   }
-
   .luggage-card {
     grid-template-columns: 1fr;
-    gap: 18px;
+    gap: 16px;
   }
-
   .luggage-card__media {
-    min-height: 300px;
+    min-height: 270px;
   }
-
   .luggage-card__content {
-    padding-right: 0;
-  }
-
-  .luggage-card__header h2 {
-    font-size: 1.5rem;
-  }
-
-  .thumbnail-item {
-    width: 58px;
-    height: 72px;
+    padding-top: 0;
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 640px) {
   .rare-luggage-showcase {
-    padding: 14px 14px 22px;
+    padding: 16px 0 28px;
   }
-
+  .rare-luggage-showcase__wrapper {
+    width: 92%;
+    gap: 16px;
+  }
   .luggage-card {
     padding: 14px;
     border-radius: 16px;
-    gap: 14px;
   }
-
   .luggage-card__media {
-    min-height: 250px;
+    min-height: 240px;
     border-radius: 12px;
   }
-
-  .luggage-card__content {
-    gap: 12px;
-  }
-
   .luggage-card__header h2 {
-    font-size: 1.3rem;
+    font-size: 1.5rem;
   }
-
   .luggage-card__header p {
-    font-size: 0.84rem;
+    font-size: 0.8rem;
   }
-
-  .option-label,
-  .option-values span {
-    font-size: 0.76rem;
+  .luggage-thumb {
+    width: 56px;
+    height: 66px;
   }
-
-  .size-pill {
-    font-size: 0.68rem;
-    min-height: 26px;
-    padding: 6px 12px;
-  }
-
-  .luggage-card__price h3 {
+  .luggage-price-main {
     font-size: 1.25rem;
   }
-
-  .luggage-btn {
-    width: 100%;
-    min-width: 100%;
-    min-height: 40px;
-    font-size: 0.82rem;
-  }
-
   .luggage-card__actions {
     flex-direction: column;
     align-items: stretch;
-    gap: 10px;
+  }
+  .luggage-btn {
+    width: 100%;
+    min-width: unset;
+    flex: unset;
+    min-height: 44px;
+    font-size: 0.86rem;
   }
 }
 
 @media (max-width: 480px) {
-  .rare-luggage-showcase {
-    padding: 12px 10px 18px;
-  }
-
   .rare-luggage-showcase__wrapper {
-    gap: 16px;
-    width: 80vw;
+    width: 94%;
   }
-
   .luggage-card {
     padding: 12px;
     border-radius: 14px;
   }
-
   .luggage-card__media {
-    min-height: 220px;
+    min-height: 210px;
   }
-
   .luggage-card__header h2 {
+    font-size: 1.3rem;
+  }
+  .luggage-size-pill {
+    font-size: 0.65rem;
+    padding: 0 10px;
+    height: 26px;
+  }
+  .luggage-price-main {
     font-size: 1.15rem;
   }
-
-  .luggage-card__header p {
-    font-size: 0.78rem;
+  .luggage-price-note {
+    font-size: 0.62rem;
   }
-
-  .thumbnail-item {
-    width: 52px;
-    height: 64px;
-  }
-
-  .size-options {
-    gap: 6px;
-  }
-
-  .size-pill {
-    font-size: 0.64rem;
-    padding: 6px 10px;
-  }
-
-  .luggage-card__price h3 {
-    font-size: 1.1rem;
-  }
-
-  .luggage-card__price p {
-    font-size: 0.66rem;
-  }
-
   .luggage-btn {
-    min-height: 38px;
-    font-size: 0.78rem;
+    min-height: 40px;
+    font-size: 0.8rem;
+  }
+  .luggage-thumb {
+    width: 50px;
+    height: 60px;
   }
 }
+
 /* =========================
    RARE IMAGE MOSAIC SECTION
 ========================= */
@@ -2018,7 +2117,7 @@ a {
   width: 100%;
   height: 100%;
   display: block;
-  object-fit: cover;
+  object-fit: cover; /* fixed: was 'fill' which distorts images */
 }
 
 /* =========================
@@ -2057,6 +2156,7 @@ a {
   object-position: center;
 }
 
+/* Level 2 content panel — kept for when un-commented */
 .level-2-content {
   min-height: 560px;
   background: #08111d;
@@ -2109,7 +2209,8 @@ a {
 }
 
 /* =========================
-   LEVEL 3 — Dynamic Image Switcher
+   LEVEL 3
+   (image_3 + text + button)
 ========================= */
 .image-level-3 {
   width: 100%;
@@ -2127,85 +2228,21 @@ a {
   gap: 90px;
 }
 
-/* --- Main display image --- */
 .level-3-image {
   background: transparent;
   border-radius: 0;
   overflow: hidden;
-  position: relative;
 }
 
-.level-3-main-img-wrap {
-  position: relative;
-  width: 100%;
-  overflow: hidden;
-}
-
-.level-3-main-img-wrap img.l3-main-img {
+.level-3-image img {
   width: 100%;
   height: auto;
   display: block;
   object-fit: cover;
   padding: 30px;
   box-sizing: border-box;
-  transition: opacity 0.38s cubic-bezier(0.4,0,0.2,1), transform 0.38s cubic-bezier(0.4,0,0.2,1);
 }
 
-.level-3-main-img-wrap img.l3-main-img.is-switching {
-  opacity: 0;
-  transform: scale(0.97);
-}
-
-/* --- Thumbnail strip --- */
-.level-3-thumbs {
-  display: flex;
-  flex-direction: row;
-  gap: 10px;
-  justify-content: center;
-  margin-top: 0;
-  padding: 0 30px;
-  box-sizing: border-box;
-  flex-wrap: wrap;
-}
-
-.l3-thumb {
-  width: 60px;
-  height: 60px;
-  border-radius: 4px;
-  overflow: hidden;
-  cursor: pointer;
-  border: 2px solid transparent;
-  transition: border-color 0.22s ease, transform 0.18s ease, box-shadow 0.18s ease;
-  flex-shrink: 0;
-  background: #1a1a1a;
-  position: relative;
-}
-
-.l3-thumb img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  padding: 0;
-  transition: transform 0.22s ease;
-}
-
-.l3-thumb:hover {
-  border-color: rgba(255,255,255,0.5);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(0,0,0,0.5);
-}
-
-.l3-thumb.active {
-  border-color: #fff;
-  box-shadow: 0 0 0 1px #fff, 0 4px 16px rgba(255,255,255,0.15);
-}
-
-.l3-thumb.active img {
-  transform: scale(1.04);
-}
-
-/* --- Content panel --- */
 .level-3-content {
   background: transparent;
   display: flex;
@@ -2244,7 +2281,9 @@ a {
   line-height: 1;
   text-decoration: none;
   border-radius: 0;
-  transition: opacity 0.2s ease, transform 0.2s ease;
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
 }
 
 .level-3-button:hover {
@@ -2298,11 +2337,6 @@ a {
     min-height: 48px;
     font-size: 15px;
   }
-
-  .l3-thumb {
-    width: 70px;
-    height: 70px;
-  }
 }
 
 /* =========================
@@ -2353,11 +2387,6 @@ a {
     min-height: 42px;
     font-size: 13px;
   }
-
-  .l3-thumb {
-    width: 54px;
-    height: 54px;
-  }
 }
 
 /* =========================
@@ -2402,11 +2431,6 @@ a {
     padding: 10px 22px;
     font-size: 12px;
   }
-
-  .l3-thumb {
-    width: 48px;
-    height: 48px;
-  }
 }
 
 /* =========================
@@ -2447,18 +2471,8 @@ a {
     gap: 24px;
   }
 
-  .level-3-image img.l3-main-img {
+  .level-3-image img {
     padding: 16px;
-  }
-
-  .level-3-thumbs {
-    padding: 0 16px;
-    gap: 8px;
-  }
-
-  .l3-thumb {
-    width: 44px;
-    height: 44px;
   }
 
   .level-3-content-inner {
@@ -2516,19 +2530,8 @@ a {
     gap: 16px;
   }
 
-  .level-3-image img.l3-main-img {
+  .level-3-image img {
     padding: 10px;
-  }
-
-  .level-3-thumbs {
-    padding: 0 10px;
-    gap: 6px;
-  }
-
-  .l3-thumb {
-    width: 38px;
-    height: 38px;
-    border-radius: 3px;
   }
 
   .level-3-content-inner {

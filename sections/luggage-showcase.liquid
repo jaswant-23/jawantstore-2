@@ -1,114 +1,223 @@
+{% comment %} 
+  ============================================================
+  RARE LUGGAGE SHOWCASE — Full Section (Liquid + CSS + JS)
+  File: sections/rare-luggage-showcase.liquid
+  ============================================================ 
+{% endcomment %}
+
 <!-- ========================================
-  LUGGAGE SHOWCASE SECTION (INDEPENDENT)
-======================================== -->
-<section id="rareLuggageShowcase" class="rare-luggage-showcase">
+  LUGGAGE SHOWCASE SECTION
+  ======================================== -->
+<section id="rareLuggageShowcase-{{ section.id }}" class="rare-luggage-showcase">
   <div class="rare-luggage-showcase__wrapper">
 
     {%- for block in section.blocks -%}
-      <div class="luggage-card" {{ block.shopify_attributes }}>
+      {%- assign card_index = forloop.index0 -%}
 
-        <!-- Left Image -->
+      <div
+        class="luggage-card"
+        {{ block.shopify_attributes }}
+        data-card-index="{{ card_index }}">
+
+        <!-- ── Left: Main Image + Arrows ── -->
         <div class="luggage-card__media">
+
+          <button
+            class="luggage-card__arrow luggage-card__arrow--prev"
+            data-card="{{ card_index }}"
+            data-dir="-1"
+            aria-label="Previous image">&#8249;</button>
+
           {%- if block.settings.product_image != blank -%}
             <img
+              id="luggage-main-img-{{ card_index }}"
+              class="luggage-card__main-img"
               src="{{ block.settings.product_image | image_url: width: 1200 }}"
               alt="{{ block.settings.product_title | escape }}"
               loading="lazy"
               width="1200"
               height="1200"
-            >
+              data-thumb-index="0">
+          {%- else -%}
+            <img
+              id="luggage-main-img-{{ card_index }}"
+              class="luggage-card__main-img"
+              src="{{ 'product-1' | placeholder_svg_tag }}"
+              alt="{{ block.settings.product_title | escape }}"
+              loading="lazy"
+              width="1200"
+              height="1200"
+              data-thumb-index="0">
           {%- endif -%}
+
+          <button
+            class="luggage-card__arrow luggage-card__arrow--next"
+            data-card="{{ card_index }}"
+            data-dir="1"
+            aria-label="Next image">&#8250;</button>
+
         </div>
 
-        <!-- Right Content -->
+        <!-- ── Right: Content ── -->
         <div class="luggage-card__content">
 
-          <!-- Title -->
-          <div class="luggage-card__header">
-            <h2>{{ block.settings.product_title }}</h2>
-            <p>{{ block.settings.product_description }}</p>
+          <!-- Color row (top right) -->
+          <div class="luggage-card__color-row">
+            {%- if block.settings.finish_text != blank -%}
+              <span class="luggage-color-label">Color:</span>
+              <span class="luggage-color-value">{{ block.settings.finish_text }}</span>
+            {%- endif -%}
           </div>
 
-          <!-- Color -->
-          <div class="luggage-card__option-group">
-            <p class="option-label">Color:</p>
-            <div class="option-values">
-              <span>{{ block.settings.finish_text }}</span>
-            </div>
+          <!-- Title + Description -->
+          <div class="luggage-card__header">
+            {%- if block.settings.product_title != blank -%}
+              <h2>{{ block.settings.product_title }}</h2>
+            {%- endif -%}
+            {%- if block.settings.product_description != blank -%}
+              <p>{{ block.settings.product_description }}</p>
+            {%- endif -%}
           </div>
 
           <!-- Thumbnails -->
-          <div class="luggage-card__thumbnails">
-            {%- if block.settings.thumb_1 != blank -%}
-              <div class="thumbnail-item {% if block.settings.active_thumbnail == 'thumb_1' %}active{% endif %}">
+          <div class="luggage-card__thumbnails" id="luggage-thumbs-{{ card_index }}">
+
+            {%- if block.settings.product_image != blank -%}
+              <div
+                class="luggage-thumb active"
+                data-card="{{ card_index }}"
+                data-thumb-index="0"
+                data-full="{{ block.settings.product_image | image_url: width: 1200 }}"
+                data-alt="{{ block.settings.product_title | escape }}"
+                role="button"
+                tabindex="0"
+                aria-label="View main image">
                 <img
-                  src="{{ block.settings.thumb_1 | image_url: width: 300 }}"
-                  alt="{{ block.settings.product_title | escape }} thumbnail 1"
+                  src="{{ block.settings.product_image | image_url: width: 300 }}"
+                  alt="{{ block.settings.product_title | escape }} thumbnail"
                   loading="lazy"
                   width="300"
-                  height="300"
-                >
+                  height="300">
               </div>
             {%- endif -%}
 
             {%- if block.settings.thumb_2 != blank -%}
-              <div class="thumbnail-item {% if block.settings.active_thumbnail == 'thumb_2' %}active{% endif %}">
+              <div
+                class="luggage-thumb"
+                data-card="{{ card_index }}"
+                data-thumb-index="1"
+                data-full="{{ block.settings.thumb_2 | image_url: width: 1200 }}"
+                data-alt="{{ block.settings.product_title | escape }} view 2"
+                role="button"
+                tabindex="0"
+                aria-label="View image 2">
                 <img
                   src="{{ block.settings.thumb_2 | image_url: width: 300 }}"
                   alt="{{ block.settings.product_title | escape }} thumbnail 2"
                   loading="lazy"
                   width="300"
-                  height="300"
-                >
+                  height="300">
               </div>
             {%- endif -%}
 
             {%- if block.settings.thumb_3 != blank -%}
-              <div class="thumbnail-item {% if block.settings.active_thumbnail == 'thumb_3' %}active{% endif %}">
+              <div
+                class="luggage-thumb"
+                data-card="{{ card_index }}"
+                data-thumb-index="2"
+                data-full="{{ block.settings.thumb_3 | image_url: width: 1200 }}"
+                data-alt="{{ block.settings.product_title | escape }} view 3"
+                role="button"
+                tabindex="0"
+                aria-label="View image 3">
                 <img
                   src="{{ block.settings.thumb_3 | image_url: width: 300 }}"
                   alt="{{ block.settings.product_title | escape }} thumbnail 3"
                   loading="lazy"
                   width="300"
-                  height="300"
-                >
+                  height="300">
               </div>
             {%- endif -%}
+
+            {%- if block.settings.thumb_4 != blank -%}
+              <div
+                class="luggage-thumb"
+                data-card="{{ card_index }}"
+                data-thumb-index="3"
+                data-full="{{ block.settings.thumb_4 | image_url: width: 1200 }}"
+                data-alt="{{ block.settings.product_title | escape }} view 4"
+                role="button"
+                tabindex="0"
+                aria-label="View image 4">
+                <img
+                  src="{{ block.settings.thumb_4 | image_url: width: 300 }}"
+                  alt="{{ block.settings.product_title | escape }} thumbnail 4"
+                  loading="lazy"
+                  width="300"
+                  height="300">
+              </div>
+            {%- endif -%}
+
           </div>
 
-          <!-- Sizes -->
+          <!-- Size Options -->
           <div class="luggage-card__option-group">
-            <p class="option-label">Size:</p>
-            <div class="size-options">
+            <div class="luggage-size-header">
+              <span class="option-label">Size:</span>
+              {%- if block.settings.size_chart_link != blank -%}
+                <a
+                  href="{{ block.settings.size_chart_link }}"
+                  class="size-chart-link"
+                  target="_blank">Size chart</a>
+              {%- else -%}
+                <span class="size-chart-link" style="visibility:hidden;">Size chart</span>
+              {%- endif -%}
+            </div>
+            <div class="luggage-size-options">
 
               {%- if block.settings.size_1 != blank -%}
-                <span class="size-pill {% if block.settings.active_size == 'size_1' %}active{% endif %}">
+                <button
+                  class="luggage-size-pill{% if block.settings.active_size == 'size_1' %} active{% endif %}"
+                  data-card="{{ card_index }}"
+                  type="button">
                   {{ block.settings.size_1 }}
-                </span>
+                </button>
               {%- endif -%}
 
               {%- if block.settings.size_2 != blank -%}
-                <span class="size-pill {% if block.settings.active_size == 'size_2' %}active{% endif %}">
+                <button
+                  class="luggage-size-pill{% if block.settings.active_size == 'size_2' %} active{% endif %}"
+                  data-card="{{ card_index }}"
+                  type="button">
                   {{ block.settings.size_2 }}
-                </span>
+                </button>
               {%- endif -%}
 
               {%- if block.settings.size_3 != blank -%}
-                <span class="size-pill {% if block.settings.active_size == 'size_3' %}active{% endif %}">
+                <button
+                  class="luggage-size-pill{% if block.settings.active_size == 'size_3' %} active{% endif %}"
+                  data-card="{{ card_index }}"
+                  type="button">
                   {{ block.settings.size_3 }}
-                </span>
+                </button>
               {%- endif -%}
 
               {%- if block.settings.size_4 != blank -%}
-                <span class="size-pill {% if block.settings.active_size == 'size_4' %}active{% endif %}">
+                <button
+                  class="luggage-size-pill{% if block.settings.active_size == 'size_4' %} active{% endif %}"
+                  data-card="{{ card_index }}"
+                  type="button">
                   {{ block.settings.size_4 }}
-                </span>
+                </button>
               {%- endif -%}
 
               {%- if block.settings.size_5 != blank -%}
-                <span class="size-pill {% if block.settings.active_size == 'size_5' %}active{% endif %}">
+                <button
+                  class="luggage-size-pill{% if block.settings.active_size == 'size_5' %} active{% endif %}"
+                  data-card="{{ card_index }}"
+                  type="button">
                   {{ block.settings.size_5 }}
-                </span>
+                </button>
               {%- endif -%}
 
             </div>
@@ -116,164 +225,209 @@
 
           <!-- Price -->
           <div class="luggage-card__price">
-            <h3>{{ block.settings.price_text }}</h3>
-            <p>{{ block.settings.price_note }}</p>
+            <div class="luggage-price-row">
+              {%- if block.settings.price_text != blank -%}
+                <span class="luggage-price-main">{{ block.settings.price_text }}</span>
+              {%- endif -%}
+              {%- if block.settings.price_old != blank -%}
+                <span class="luggage-price-old">{{ block.settings.price_old }}</span>
+              {%- endif -%}
+            </div>
+            {%- if block.settings.price_note != blank -%}
+              <p class="luggage-price-note">{{ block.settings.price_note }}</p>
+            {%- endif -%}
           </div>
 
-          <!-- Button -->
+          <!-- Buttons -->
           <div class="luggage-card__actions">
             {%- if block.settings.button_label != blank -%}
-              <a
-                href="{{ block.settings.button_link | default: '#' }}"
-                class="luggage-btn luggage-btn--primary"
-              >
-                {{ block.settings.button_label }}
-              </a>
+              <a href="{{ block.settings.button_link | default: '#' }}" class="luggage-btn luggage-btn--primary">{{ block.settings.button_label }}</a>
+            {%- endif -%}
+
+            {%- if block.settings.button_2_label != blank -%}
+              <a href="{{ block.settings.button_2_link | default: '#' }}" class="luggage-btn luggage-btn--secondary">{{ block.settings.button_2_label }}</a>
             {%- endif -%}
           </div>
 
         </div>
+      <!-- /.luggage-card__content -->
       </div>
+      <!-- /.luggage-card -->
+
     {%- endfor -%}
 
   </div>
+<!-- /.rare-luggage-showcase__wrapper -->
 </section>
 
+
+
+<!-- ========================================
+  SCHEMA
+  ======================================== -->
 {% schema %}
-{
-  "name": "Luggage Showcase",
-  "blocks": [
-    {
-      "type": "product_card",
-      "name": "Product Card",
-      "settings": [
-        {
-          "type": "image_picker",
-          "id": "product_image",
-          "label": "Main Image"
-        },
-        {
-          "type": "text",
-          "id": "product_title",
-          "label": "Title",
-          "default": "GALLARDO"
-        },
-        {
-          "type": "textarea",
-          "id": "product_description",
-          "label": "Description",
-          "default": "A sculpted hard shell luggage built for the modern Indian traveller."
-        },
-        {
-          "type": "text",
-          "id": "finish_text",
-          "label": "Color",
-          "default": "Carbon Black"
-        },
-        {
-          "type": "image_picker",
-          "id": "thumb_1",
-          "label": "Thumbnail 1"
-        },
-        {
-          "type": "image_picker",
-          "id": "thumb_2",
-          "label": "Thumbnail 2"
-        },
-        {
-          "type": "image_picker",
-          "id": "thumb_3",
-          "label": "Thumbnail 3"
-        },
-        {
-          "type": "select",
-          "id": "active_thumbnail",
-          "label": "Active Thumbnail",
-          "default": "thumb_1",
-          "options": [
-            { "value": "thumb_1", "label": "Thumb 1" },
-            { "value": "thumb_2", "label": "Thumb 2" },
-            { "value": "thumb_3", "label": "Thumb 3" }
-          ]
-        },
-        {
-          "type": "text",
-          "id": "size_1",
-          "label": "Size 1",
-          "default": "Cabin"
-        },
-        {
-          "type": "text",
-          "id": "size_2",
-          "label": "Size 2",
-          "default": "Medium"
-        },
-        {
-          "type": "text",
-          "id": "size_3",
-          "label": "Size 3",
-          "default": "Large"
-        },
-        {
-          "type": "text",
-          "id": "size_4",
-          "label": "Size 4",
-          "default": "Cabin + Medium"
-        },
-        {
-          "type": "text",
-          "id": "size_5",
-          "label": "Size 5",
-          "default": "Cabin + Medium + Large"
-        },
-        {
-          "type": "select",
-          "id": "active_size",
-          "label": "Active Size",
-          "default": "size_3",
-          "options": [
-            { "value": "size_1", "label": "Size 1" },
-            { "value": "size_2", "label": "Size 2" },
-            { "value": "size_3", "label": "Size 3" },
-            { "value": "size_4", "label": "Size 4" },
-            { "value": "size_5", "label": "Size 5" }
-          ]
-        },
-        {
-          "type": "text",
-          "id": "price_text",
-          "label": "Price",
-          "default": "₹8,999"
-        },
-        {
-          "type": "text",
-          "id": "price_note",
-          "label": "Note",
-          "default": "Delivery in 5-7 days | Inclusive of all taxes"
-        },
-        {
-          "type": "text",
-          "id": "button_label",
-          "label": "Button Label",
-          "default": "Prebook now"
-        },
-        {
-          "type": "url",
-          "id": "button_link",
-          "label": "Button Link"
-        }
-      ]
-    }
-  ],
-  "max_blocks": 10,
-  "presets": [
-    {
-      "name": "Luggage Showcase",
-      "blocks": [
-        { "type": "product_card" },
-        { "type": "product_card" }
-      ]
-    }
-  ]
-}
+  {
+    "name": "Luggage Showcase",
+    "tag": "section",
+    "class": "section-luggage-showcase",
+    "blocks": [
+      {
+        "type": "product_card",
+        "name": "Product Card",
+        "settings": [
+          {
+            "type": "header",
+            "content": "Product Info"
+          },
+          {
+            "type": "text",
+            "id": "product_title",
+            "label": "Title",
+            "default": "GALLARDO"
+          },
+          {
+            "type": "textarea",
+            "id": "product_description",
+            "label": "Description",
+            "default": "A Sculpted Hard-Shell Luggage Built for the Modern Indian Traveller."
+          },
+          {
+            "type": "header",
+            "content": "Images"
+          }, {
+            "type": "image_picker",
+            "id": "product_image",
+            "label": "Main / Thumbnail 1"
+          }, {
+            "type": "image_picker",
+            "id": "thumb_2",
+            "label": "Thumbnail 2"
+          }, {
+            "type": "image_picker",
+            "id": "thumb_3",
+            "label": "Thumbnail 3"
+          }, {
+            "type": "image_picker",
+            "id": "thumb_4",
+            "label": "Thumbnail 4 (optional)"
+          }, {
+            "type": "header",
+            "content": "Options"
+          }, {
+            "type": "text",
+            "id": "finish_text",
+            "label": "Color / Finish",
+            "default": "Carbon Black"
+          }, {
+            "type": "text",
+            "id": "size_1",
+            "label": "Size 1",
+            "default": "Cabin"
+          }, {
+            "type": "text",
+            "id": "size_2",
+            "label": "Size 2",
+            "default": "Medium"
+          }, {
+            "type": "text",
+            "id": "size_3",
+            "label": "Size 3",
+            "default": "Large"
+          }, {
+            "type": "text",
+            "id": "size_4",
+            "label": "Size 4",
+            "default": "Cabin+Medium"
+          }, {
+            "type": "text",
+            "id": "size_5",
+            "label": "Size 5",
+            "default": "Cabin+Medium+Large"
+          }, {
+            "type": "select",
+            "id": "active_size",
+            "label": "Default Active Size",
+            "default": "size_3",
+            "options": [
+              {
+                "value": "size_1",
+                "label": "Size 1"
+              },
+              {
+                "value": "size_2",
+                "label": "Size 2"
+              },
+              {
+                "value": "size_3",
+                "label": "Size 3"
+              },
+              {
+                "value": "size_4",
+                "label": "Size 4"
+              }, {
+                "value": "size_5",
+                "label": "Size 5"
+              }
+            ]
+          }, {
+            "type": "url",
+            "id": "size_chart_link",
+            "label": "Size Chart Link (optional)"
+          }, {
+            "type": "header",
+            "content": "Pricing"
+          }, {
+            "type": "text",
+            "id": "price_text",
+            "label": "Price",
+            "default": "₹8,999"
+          }, {
+            "type": "text",
+            "id": "price_old",
+            "label": "Original Price (struck-through)",
+            "default": "₹11,500"
+          }, {
+            "type": "text",
+            "id": "price_note",
+            "label": "Price Note",
+            "default": "Delivery in 5-7 days | Inclusive of all taxes"
+          }, {
+            "type": "header",
+            "content": "Buttons"
+          }, {
+            "type": "text",
+            "id": "button_label",
+            "label": "Primary Button Label",
+            "default": "Prebook now"
+          }, {
+            "type": "url",
+            "id": "button_link",
+            "label": "Primary Button Link"
+          }, {
+            "type": "text",
+            "id": "button_2_label",
+            "label": "Secondary Button Label",
+            "default": "Know more"
+          }, {
+            "type": "url",
+            "id": "button_2_link",
+            "label": "Secondary Button Link"
+          }
+        ]
+      }
+    ],
+    "max_blocks": 10,
+    "presets": [
+      {
+        "name": "Luggage Showcase",
+        "blocks": [
+          {
+            "type": "product_card"
+          }, {
+            "type": "product_card"
+          }
+        ]
+      }
+    ]
+  }
 {% endschema %}

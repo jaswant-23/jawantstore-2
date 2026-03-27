@@ -133,68 +133,68 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-
 // Image Grid
 (function () {
-  'use strict';
+  "use strict";
 
   function initL3Switcher() {
-    var mainImg = document.getElementById('l3MainImg');
-    var thumbsContainer = document.getElementById('l3Thumbs');
+    var mainImg = document.getElementById("l3MainImg");
+    var thumbsContainer = document.getElementById("l3Thumbs");
 
     if (!mainImg || !thumbsContainer) return;
 
-    var thumbs = thumbsContainer.querySelectorAll('.l3-thumb');
+    var thumbs = thumbsContainer.querySelectorAll(".l3-thumb");
     if (thumbs.length < 2) return;
 
     var switching = false;
 
     function switchImage(thumb) {
-      if (switching || thumb.classList.contains('active')) return;
+      if (switching || thumb.classList.contains("active")) return;
 
-      var newSrc = thumb.getAttribute('data-full');
-      var newAlt = thumb.getAttribute('data-alt') || '';
+      var newSrc = thumb.getAttribute("data-full");
+      var newAlt = thumb.getAttribute("data-alt") || "";
 
       if (!newSrc) return;
 
       switching = true;
 
       // Fade out main image
-      mainImg.classList.add('is-switching');
+      mainImg.classList.add("is-switching");
 
       setTimeout(function () {
         mainImg.src = newSrc;
         mainImg.alt = newAlt;
 
         // Update active thumb
-        thumbs.forEach(function (t) { t.classList.remove('active'); });
-        thumb.classList.add('active');
+        thumbs.forEach(function (t) {
+          t.classList.remove("active");
+        });
+        thumb.classList.add("active");
 
         // Wait for new image to paint, then fade in
         mainImg.onload = function () {
-          mainImg.classList.remove('is-switching');
+          mainImg.classList.remove("is-switching");
           mainImg.onload = null;
           switching = false;
         };
 
         // Fallback: if onload doesn't fire (cached image)
         setTimeout(function () {
-          mainImg.classList.remove('is-switching');
+          mainImg.classList.remove("is-switching");
           switching = false;
         }, 420);
-
       }, 300);
     }
 
     thumbs.forEach(function (thumb) {
       // Mouse click
-      thumb.addEventListener('click', function () {
+      thumb.addEventListener("click", function () {
         switchImage(thumb);
       });
 
       // Keyboard: Enter / Space
-      thumb.addEventListener('keydown', function (e) {
-        if (e.key === 'Enter' || e.key === ' ') {
+      thumb.addEventListener("keydown", function (e) {
+        if (e.key === "Enter" || e.key === " ") {
           e.preventDefault();
           switchImage(thumb);
         }
@@ -203,21 +203,178 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // Init after DOM is ready
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initL3Switcher);
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initL3Switcher);
   } else {
     initL3Switcher();
   }
 
   // Re-init if Shopify theme editor reloads the section
-  document.addEventListener('shopify:section:load', function (e) {
-    if (e.target && e.target.querySelector('#rareImageGrid')) {
+  document.addEventListener("shopify:section:load", function (e) {
+    if (e.target && e.target.querySelector("#rareImageGrid")) {
       initL3Switcher();
     }
   });
 })();
 
-// Footer 
+// Lugguge showcase
+(function () {
+  "use strict";
+
+  /* ── Per-card state ── */
+  var lcState = {};
+
+  /* ── Init all cards in this section ── */
+  function initLuggageShowcase() {
+    var section = document.getElementById(
+      "rareLuggageShowcase-{{ section.id }}",
+    );
+    if (!section) return;
+
+    var cards = section.querySelectorAll(".luggage-card");
+
+    cards.forEach(function (card) {
+      var idx = card.getAttribute("data-card-index");
+      if (idx === null) return;
+
+      /* Collect all thumb elements for this card */
+      var thumbEls = card.querySelectorAll(
+        '.luggage-thumb[data-card="' + idx + '"]',
+      );
+
+      /* Build thumb data array from DOM */
+      var thumbData = [];
+      thumbEls.forEach(function (el) {
+        thumbData.push({
+          full: el.getAttribute("data-full") || "",
+          alt: el.getAttribute("data-alt") || "",
+        });
+      });
+
+      /* Init state */
+      lcState[idx] = {
+        activeThumb: 0,
+        totalThumbs: thumbData.length,
+        thumbData: thumbData,
+      };
+    });
+
+    /* Delegate events on section */
+    section.addEventListener("click", handleClick);
+    section.addEventListener("keydown", handleKeydown);
+  }
+
+  /* ── Unified click handler ── */
+  function handleClick(e) {
+    /* Thumbnail */
+    var thumb = e.target.closest(".luggage-thumb");
+    if (thumb) {
+      var ci = thumb.getAttribute("data-card");
+      var ti = parseInt(thumb.getAttribute("data-thumb-index"), 10);
+      switchImage(ci, ti);
+      return;
+    }
+
+    /* Arrow */
+    var arrow = e.target.closest(".luggage-card__arrow");
+    if (arrow) {
+      var ci = arrow.getAttribute("data-card");
+      var dir = parseInt(arrow.getAttribute("data-dir"), 10);
+      var s = lcState[ci];
+      if (!s) return;
+      var next = (s.activeThumb + dir + s.totalThumbs) % s.totalThumbs;
+      switchImage(ci, next);
+      return;
+    }
+
+    /* Size pill */
+    var pill = e.target.closest(".luggage-size-pill");
+    if (pill) {
+      var ci = pill.getAttribute("data-card");
+      var card = document.querySelector(
+        '.luggage-card[data-card-index="' + ci + '"]',
+      );
+      if (!card) return;
+      card.querySelectorAll(".luggage-size-pill").forEach(function (p) {
+        p.classList.remove("active");
+      });
+      pill.classList.add("active");
+    }
+  }
+
+  /* ── Keyboard handler ── */
+  function handleKeydown(e) {
+    if (e.key !== "Enter" && e.key !== " ") return;
+    var thumb = e.target.closest(".luggage-thumb");
+    if (thumb) {
+      e.preventDefault();
+      var ci = thumb.getAttribute("data-card");
+      var ti = parseInt(thumb.getAttribute("data-thumb-index"), 10);
+      switchImage(ci, ti);
+    }
+  }
+
+  /* ── Switch main image with fade ── */
+  function switchImage(cardIndex, thumbIndex) {
+    var s = lcState[cardIndex];
+    if (!s || thumbIndex === s.activeThumb) return;
+
+    var thumbData = s.thumbData[thumbIndex];
+    if (!thumbData || !thumbData.full) return;
+
+    var mainImg = document.getElementById("luggage-main-img-" + cardIndex);
+    if (!mainImg) return;
+
+    /* Fade out */
+    mainImg.classList.add("lc-fading");
+
+    setTimeout(function () {
+      mainImg.src = thumbData.full;
+      mainImg.alt = thumbData.alt;
+      s.activeThumb = thumbIndex;
+
+      /* Update active thumb border */
+      var card = document.querySelector(
+        '.luggage-card[data-card-index="' + cardIndex + '"]',
+      );
+      if (card) {
+        card.querySelectorAll(".luggage-thumb").forEach(function (el, i) {
+          el.classList.toggle("active", i === thumbIndex);
+        });
+      }
+
+      /* Fade in after image loads */
+      mainImg.onload = function () {
+        mainImg.classList.remove("lc-fading");
+        mainImg.onload = null;
+      };
+      /* Fallback for cached images */
+      setTimeout(function () {
+        mainImg.classList.remove("lc-fading");
+      }, 350);
+    }, 220);
+  }
+
+  /* ── Run on DOM ready ── */
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initLuggageShowcase);
+  } else {
+    initLuggageShowcase();
+  }
+
+  /* ── Shopify theme editor: re-init on section reload ── */
+  document.addEventListener("shopify:section:load", function (e) {
+    if (
+      e.target &&
+      e.target.querySelector("#rareLuggageShowcase-{{ section.id }}")
+    ) {
+      lcState = {};
+      initLuggageShowcase();
+    }
+  });
+})();
+
+// Footer
 (function () {
   function initAccordion() {
     // Only activate on mobile widths
