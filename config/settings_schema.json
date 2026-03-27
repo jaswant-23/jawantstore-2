@@ -1,0 +1,77 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "ESC Plan",
+    "theme_version": "1.0.0",
+    "theme_author": "Escape Plan",
+    "theme_documentation_url": "https://escapeplan.com",
+    "theme_support_url": "https://escapeplan.com/support"
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      {
+        "type": "color",
+        "id": "colors_primary",
+        "label": "Primary Color",
+        "default": "#000000"
+      },
+      {
+        "type": "color",
+        "id": "colors_secondary",
+        "label": "Secondary Color",
+        "default": "#ffffff"
+      }
+    ]
+  },
+  {
+    "name": "Top Bar",
+    "settings": [
+      {
+        "type": "text",
+        "id": "top_bar_text",
+        "label": "Top Bar Message",
+        "default": "GET EXTRA 10% OFF | USE : FIRSTESCAPE"
+      }
+    ]
+  },
+  {
+    "name": "Hero Banner",
+    "settings": [
+      {
+        "type": "text",
+        "id": "hero_title",
+        "label": "Hero Title",
+        "default": "RARE TRAVEL"
+      },
+      {
+        "type": "text",
+        "id": "hero_subtitle",
+        "label": "Hero Subtitle",
+        "default": "A new state of movement"
+      },
+      {
+        "type": "text",
+        "id": "hero_coming_soon_text",
+        "label": "Coming Soon Text",
+        "default": "COMING SOON"
+      },
+      {
+        "type": "image_picker",
+        "id": "hero_image_desktop",
+        "label": "Hero Image (Desktop)"
+      },
+      {
+        "type": "image_picker",
+        "id": "hero_image_mobile",
+        "label": "Hero Image (Mobile)"
+      },
+      {
+        "type": "text",
+        "id": "notify_box_heading",
+        "label": "Notify Box Heading",
+        "default": "BE THE FIRST ONE TO KNOW"
+      }
+    ]
+  }
+]

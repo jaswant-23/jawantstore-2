@@ -1,0 +1,224 @@
+<!-- ========================================
+     FOOTER SECTION
+======================================== -->
+
+<div class="footer">
+  <div class="footer-top">
+
+    <!-- Footer Logo + Tagline -->
+    <div class="footer-logo">
+      {%- if section.settings.footer_logo != blank -%}
+        <img
+          src="{{ section.settings.footer_logo | image_url: width: 200 }}"
+          alt="{{ shop.name | escape }}"
+          loading="lazy"
+          width="200"
+          height="auto"
+        >
+      {%- else -%}
+        <img
+          src="{{ 'Logo.png' | asset_url }}"
+          alt="{{ shop.name | escape }}"
+          loading="lazy"
+          width="200"
+          height="auto"
+        >
+      {%- endif -%}
+
+      {%- if section.settings.footer_tagline != blank -%}
+        <p class="footer-tagline">
+          {{ section.settings.footer_tagline | escape }}
+        </p>
+      {%- endif -%}
+    </div>
+
+    <!-- Know More Column -->
+    <div class="footer-col">
+      {%- if section.settings.col1_heading != blank -%}
+        <h3>{{ section.settings.col1_heading | escape }}</h3>
+      {%- endif -%}
+
+      {%- assign col1_links = linklists[section.settings.col1_menu].links -%}
+      {%- if col1_links != blank -%}
+        {%- for link in col1_links -%}
+          <a href="{{ link.url }}">{{ link.title | escape }}</a>
+        {%- endfor -%}
+      {%- else -%}
+        <a href="{{ routes.root_url }}">Home</a>
+        <a href="/pages/about-us">About us</a>
+        <a href="/pages/warranty">Warranty</a>
+        <a href="/pages/contact">Contact</a>
+        <a href="/blogs/news">News</a>
+        <a href="/blogs/blog">Blog</a>
+      {%- endif -%}
+    </div>
+
+    <!-- Help Column -->
+    <div class="footer-col">
+      {%- if section.settings.col2_heading != blank -%}
+        <h3>{{ section.settings.col2_heading | escape }}</h3>
+      {%- endif -%}
+
+      {%- assign col2_links = linklists[section.settings.col2_menu].links -%}
+      {%- if col2_links != blank -%}
+        {%- for link in col2_links -%}
+          <a href="{{ link.url }}">{{ link.title | escape }}</a>
+        {%- endfor -%}
+      {%- else -%}
+        <a href="/pages/order-tracking">Order Tracking</a>
+        <a href="/pages/return-order">Return Order</a>
+        <a href="/policies/terms-of-service">Terms of service</a>
+        <a href="/policies/privacy-policy">Privacy Policy</a>
+        <a href="/policies/refund-policy">Returns and Refund Policy</a>
+        <a href="/pages/grievance-policy">Grievance Policy</a>
+      {%- endif -%}
+    </div>
+
+    <!-- Contact Column -->
+    <div class="footer-col footer-contact-col">
+      {%- if section.settings.col3_heading != blank -%}
+        <h3>{{ section.settings.col3_heading | escape }}</h3>
+      {%- endif -%}
+
+      {%- if section.settings.company_name != blank -%}
+        <p class="footer-contact-text footer-company-name">
+          {{ section.settings.company_name | escape }}
+        </p>
+      {%- endif -%}
+
+      {%- if section.settings.company_address != blank -%}
+        <p class="footer-contact-text footer-company-address">
+          {{ section.settings.company_address | newline_to_br }}
+        </p>
+      {%- endif -%}
+
+      {%- if section.settings.company_cin != blank -%}
+        <p class="footer-contact-text footer-company-cin">
+          {{ section.settings.company_cin | escape }}
+        </p>
+      {%- endif -%}
+
+      {%- if section.settings.contact_phone != blank -%}
+        <a href="tel:{{ section.settings.contact_phone | strip }}">
+          Contact Number: {{ section.settings.contact_phone | escape }}
+        </a>
+      {%- endif -%}
+
+      {%- if section.settings.contact_email != blank -%}
+        <a href="mailto:{{ section.settings.contact_email | strip }}">
+          Email ID: {{ section.settings.contact_email | escape }}
+        </a>
+      {%- endif -%}
+    </div>
+
+  </div>
+
+  <!-- Footer Bottom -->
+  <div class="footer-bottom">
+    <p>{{ section.settings.copyright_text | escape }}</p>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "footer_logo",
+      "label": "Footer Logo"
+    },
+    {
+      "type": "text",
+      "id": "footer_tagline",
+      "label": "Footer Tagline",
+      "default": "All Things Travel"
+    },
+    {
+      "type": "header",
+      "content": "Know More Column"
+    },
+    {
+      "type": "text",
+      "id": "col1_heading",
+      "label": "Column 1 Heading",
+      "default": "KNOW MORE"
+    },
+    {
+      "type": "link_list",
+      "id": "col1_menu",
+      "label": "Column 1 Menu"
+    },
+    {
+      "type": "header",
+      "content": "Help Column"
+    },
+    {
+      "type": "text",
+      "id": "col2_heading",
+      "label": "Column 2 Heading",
+      "default": "HELP"
+    },
+    {
+      "type": "link_list",
+      "id": "col2_menu",
+      "label": "Column 2 Menu"
+    },
+    {
+      "type": "header",
+      "content": "Contact Column"
+    },
+    {
+      "type": "text",
+      "id": "col3_heading",
+      "label": "Column 3 Heading",
+      "default": "CONTACT US"
+    },
+    {
+      "type": "text",
+      "id": "company_name",
+      "label": "Company Name",
+      "default": "ENCHANTE BRANDS PRIVATE LIMITED"
+    },
+    {
+      "type": "textarea",
+      "id": "company_address",
+      "label": "Company Address",
+      "default": "Unit 608-609, Sakti Statesman, 6th Floor, Green Glen Layout, No. 37/301/34/1, SY. No. 34, Ibblur Village, Begur Hobli, Bellandur, Bangalore, Karnataka, India, 560103"
+    },
+    {
+      "type": "text",
+      "id": "company_cin",
+      "label": "CIN Number",
+      "default": "CIN : U82990KA2024PTC195320"
+    },
+    {
+      "type": "text",
+      "id": "contact_phone",
+      "label": "Contact Phone",
+      "default": "9740508909"
+    },
+    {
+      "type": "text",
+      "id": "contact_email",
+      "label": "Contact Email",
+      "default": "care@enchantebrands.com"
+    },
+    {
+      "type": "header",
+      "content": "Footer Bottom"
+    },
+    {
+      "type": "text",
+      "id": "copyright_text",
+      "label": "Copyright Text",
+      "default": "© ESCAPE PLAN 2026, ALL RIGHTS RESERVED."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Footer"
+    }
+  ]
+}
+{% endschema %}

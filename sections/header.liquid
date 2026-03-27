@@ -1,0 +1,115 @@
+<!-- ========================================
+  HEADER SECTION
+  ======================================== -->
+<!-- Top Bar -->
+<div class="top-bar">
+  {{ section.settings.top_bar_text }}
+</div>
+
+<!-- Navbar -->
+<nav class="navbar">
+  <div class="nav-inner">
+
+    <!-- Logo -->
+    <a href="{{ routes.root_url }}" class="logo">
+
+      {%- if section.settings.logo != blank -%}
+
+        {{ section.settings.logo | image_url: width: 200 | image_tag: alt: shop.name, width: 200, height: 52, loading: 'eager'
+        }}
+
+      {%- else -%}
+
+        <img
+          src="{{ '' | asset_url }}"
+          alt="{{ shop.name | escape }}"
+          width="200"
+          height="52"
+          loading="eager">
+
+      {%- endif -%}
+
+    </a>
+
+    <!-- Desktop Menu -->
+    <ul class="menu" id="mobileMenu">
+      {%- for link in linklists[section.settings.menu].links -%}
+        <li>
+          <a href="{{ link.url }}">{{ link.title | upcase }}</a>
+        </li>
+      {%- else -%}
+        <li>
+          <a href="{{ routes.root_url }}">HOME</a>
+        </li>
+        <li>
+          <a href="{{ routes.collections_url }}/bestsellers">BESTSELLERS</a>
+        </li>
+        <li>
+          <a href="{{ routes.collections_url }}/all">ALL COLLECTION</a>
+        </li>
+        <li>
+          <a href="{{ routes.collections_url }}/hrx">HRX</a>
+        </li>
+        <li>
+          <a href="{{ routes.collections_url }}/sets">SHOP BY SETS</a>
+        </li>
+        <li>
+          <a href="{{ routes.collections_url }}/durable-picks">DURABLE PICKS</a>
+        </li>
+        <li>
+          <a href="{{ routes.root_url }}pages/contact">CONTACT</a>
+        </li>
+        <li>
+          <a href="{{ routes.root_url }}pages/about-us">ABOUT US</a>
+        </li>
+        <li>
+          <a href="{{ routes.root_url }}blogs/news">NEWS</a>
+        </li>
+        <li>
+          <a href="{{ routes.root_url }}wishlist">MY WISHLIST</a>
+        </li>
+      {%- endfor -%}
+    </ul>
+
+    <!-- Icons -->
+    <div class="icons">
+      <i class="fa-solid fa-magnifying-glass" onclick="searchProduct()"></i>
+      <i class="fa-regular fa-user" onclick="openUser()"></i>
+      <i class="fa-solid fa-bag-shopping" onclick="openCart()"></i>
+    </div>
+
+    <!-- Hamburger Toggle -->
+    <div class="menu-toggle" onclick="toggleMenu()">
+      <i class="fa-solid fa-bars" id="menuIcon"></i>
+    </div>
+
+  </div>
+</nav>
+
+{% schema %}
+  {
+    "name": "Header",
+    "settings": [
+      {
+        "type": "text",
+        "id": "top_bar_text",
+        "label": "Top Bar Message",
+        "default": "GET EXTRA 10% OFF | USE : FIRSTESCAPE"
+      }, {
+        "type": "image_picker",
+        "id": "logo",
+        "label": "Logo Image"
+      }, {
+        "type": "link_list",
+        "id": "menu",
+        "label": "Navigation Menu",
+        "default": "main-menu"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Header"
+      }
+    ]
+  }
+{% endschema %}

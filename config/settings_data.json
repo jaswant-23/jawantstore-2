@@ -1,0 +1,56 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "current": {
+    "colors_primary": "#000000",
+    "colors_secondary": "#ffffff",
+    "top_bar_text": "GET EXTRA 10% OFF | USE : FIRSTESCAPE",
+    "hero_title": "RARE TRAVEL",
+    "hero_subtitle": "A new state of movement",
+    "hero_coming_soon_text": "COMING SOON",
+    "notify_box_heading": "BE THE FIRST ONE TO KNOW",
+    "split_hero_brand_name": "RARE",
+    "split_hero_tagline": "THE SILENT COMPANION",
+    "split_hero_eyebrow": "",
+    "split_hero_description": "",
+    "split_hero_cta_label": "",
+    "split_hero_cta_url": "",
+    "sections": {
+      "header": {
+        "type": "header",
+        "settings": {
+          "top_bar_text": "GET EXTRA 10% OFF | USE : FIRSTESCAPE",
+          "logo": "shopify://shop_images/Logo.png",
+          "menu": "main-menu"
+        }
+      },
+      "footer": {
+        "type": "footer",
+        "settings": {
+          "footer_logo": "shopify://shop_images/Logo.png",
+          "footer_tagline": "All Things Travel",
+          "col1_heading": "KNOW MORE",
+          "col1_menu": "",
+          "col2_heading": "HELP",
+          "col2_menu": "",
+          "col3_heading": "CONTACT US",
+          "company_name": "ENCHANTE BRANDS PRIVATE LIMITED",
+          "company_address": "Unit 608-609, Sakti Statesman, 6th Floor, Green Glen Layout, No. 37/301/34/1, SY. No. 34, Ibblur Village, Begur Hobli, Bellandur, Bangalore, Karnataka, India, 560103",
+          "company_cin": "CIN : U82990KA2024PTC195320",
+          "contact_phone": "9740508909",
+          "contact_email": "care@enchantebrands.com",
+          "copyright_text": "© ESCAPE PLAN 2026, ALL RIGHTS RESERVED."
+        }
+      }
+    },
+    "content_for_index": []
+  },
+  "presets": {}
+}

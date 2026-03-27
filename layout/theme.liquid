@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ page_title }} - {{ shop.name }}</title>
+
+    {%- if page_description -%}
+      <meta name="description" content="{{ page_description | escape }}" />
+    {%- endif -%}
+
+    {{ content_for_header }}
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+
+    <!-- Google Fonts: Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Theme CSS -->
+    {{ 'Theme.css' | asset_url | stylesheet_tag }}
+  </head>
+
+  <body>
+    <!-- Sections rendered in templates -->
+    {% section 'header' %}
+
+    <main>
+      {{ content_for_layout }}
+    </main>
+
+    {% section 'footer' %}
+
+    <!-- Theme JS -->
+    <script src="{{ 'Theme.js' | asset_url }}" defer></script>
+  </body>
+</html>

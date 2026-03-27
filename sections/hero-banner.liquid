@@ -1,0 +1,193 @@
+<!-- ========================================
+  HERO BANNER SECTION
+======================================== -->
+<section id="rareHeroBanner" class="rare-hero-banner">
+  <div id="rareHero-main" class="rareHero-main">
+
+    <div class="hero-upper">
+
+      <!-- Desktop Heading -->
+      <div class="uper-content-desktop">
+        <h3>{{ section.settings.desktop_heading }}</h3>
+      </div>
+
+      <!-- Mobile Overlay Content -->
+      <div class="uper-content-mobile">
+        <div class="upercontent-mobile">
+          <h5>{{ section.settings.hero_subtitle }}</h5>
+          <h1>{{ section.settings.hero_title }}</h1>
+        </div>
+
+        <div class="lowercontent-mobile">
+          {%- if section.settings.button_label != blank -%}
+            <a href="{{ section.settings.second_page_url | default: '#' }}" class="hero-button">
+              {{ section.settings.button_label }}
+            </a>
+          {%- endif -%}
+
+          <p>{{ section.settings.notify_box_heading }}</p>
+        </div>
+      </div>
+
+      <!-- Hero Image -->
+      <div class="hero-image">
+        {%- if section.settings.hero_image_desktop != blank -%}
+          <img
+            src="{{ section.settings.hero_image_desktop | image_url: width: 1800 }}"
+            alt="{{ section.settings.hero_title | escape }}"
+            width="1800"
+            height="1000"
+            loading="eager"
+            class="hero-image-desktop">
+        {%- endif -%}
+
+        {%- if section.settings.hero_image_mobile != blank -%}
+          <img
+            src="{{ section.settings.hero_image_mobile | image_url: width: 900 }}"
+            alt="{{ section.settings.hero_title | escape }}"
+            width="900"
+            height="1200"
+            loading="eager"
+            class="hero-image-mobile">
+        {%- endif -%}
+      </div>
+    </div>
+
+    <div class="hero-lower">
+
+      <!-- First Row -->
+      <div class="hero-lower1">
+        <div class="lower-content1">
+          <p>{{ section.settings.hero_coming_soon_text }}</p>
+        </div>
+
+        <div class="lower-content2">
+          {%- if section.settings.lower_card_image_2 != blank -%}
+            <img
+              src="{{ section.settings.lower_card_image_2 | image_url: width: 1200 }}"
+              alt="Lower card image 2"
+              width="1200"
+              height="700"
+              loading="lazy">
+          {%- endif -%}
+        </div>
+      </div>
+
+      <!-- Second Row -->
+      <div class="hero-lower2">
+        <div class="lower-content3">
+          {%- if section.settings.lower_card_image_3 != blank -%}
+            <img
+              src="{{ section.settings.lower_card_image_3 | image_url: width: 900 }}"
+              alt="Lower card image 3"
+              width="900"
+              height="700"
+              loading="lazy">
+          {%- endif -%}
+        </div>
+
+        <div class="lower-content4">
+          {%- if section.settings.lower_card_image_4 != blank -%}
+            <img
+              src="{{ section.settings.lower_card_image_4 | image_url: width: 900 }}"
+              alt="Lower card image 4"
+              width="900"
+              height="700"
+              loading="lazy">
+          {%- endif -%}
+        </div>
+
+        <div class="lower-content5">
+          <p>{{ section.settings.lower_text }}</p>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero Banner",
+  "settings": [
+    {
+      "type": "text",
+      "id": "desktop_heading",
+      "label": "Desktop Heading",
+      "default": "would you like new wheels?"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image_desktop",
+      "label": "Hero Image (Desktop)"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image_mobile",
+      "label": "Hero Image (Mobile)"
+    },
+    {
+      "type": "text",
+      "id": "hero_subtitle",
+      "label": "Hero Subtitle",
+      "default": "Introducing"
+    },
+    {
+      "type": "text",
+      "id": "hero_title",
+      "label": "Hero Title",
+      "default": "RARE TRAVEL"
+    },
+    {
+      "type": "text",
+      "id": "hero_coming_soon_text",
+      "label": "Left Card Text",
+      "default": "10 YEARS OF WARRANTY"
+    },
+    {
+      "type": "text",
+      "id": "notify_box_heading",
+      "label": "Notify Box Text",
+      "default": "First 100 travelers will get special Rare freebies worth up to 5K"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button Label",
+      "default": "Prebook Now"
+    },
+    {
+      "type": "url",
+      "id": "second_page_url",
+      "label": "Button Link"
+    },
+    {
+      "type": "text",
+      "id": "lower_text",
+      "label": "Right Bottom Text",
+      "default": "14 DAYS TRY & BUY"
+    },
+    {
+      "type": "image_picker",
+      "id": "lower_card_image_2",
+      "label": "Lower Card Image 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "lower_card_image_3",
+      "label": "Lower Card Image 3"
+    },
+    {
+      "type": "image_picker",
+      "id": "lower_card_image_4",
+      "label": "Lower Card Image 4"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero Banner"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,93 @@
+<!-- ========================================
+  IMAGE GRID SECTION (4 IMAGES)
+  ======================================== -->
+<section id="rareImageGrid" class="rare-image-grid">
+  <div class="image-grid-main">
+
+    <!-- Child 1 -->
+    <div class="image-grid-item">
+      {%- if section.settings.image_1 != blank -%}
+        <img
+          src="{{ section.settings.image_1 | image_url: width: 800 }}"
+          alt="Image 1"
+          width="800"
+          height="800"
+          loading="lazy"
+        >
+      {%- endif -%}
+    </div>
+
+    <!-- Child 2 -->
+    <div class="image-grid-item">
+      {%- if section.settings.image_2 != blank -%}
+        <img
+          src="{{ section.settings.image_2 | image_url: width: 800 }}"
+          alt="Image 2"
+          width="800"
+          height="800"
+          loading="lazy"
+        >
+      {%- endif -%}
+    </div>
+
+    <!-- Child 3 -->
+    <div class="image-grid-item">
+      {%- if section.settings.image_3 != blank -%}
+        <img
+          src="{{ section.settings.image_3 | image_url: width: 800 }}"
+          alt="Image 3"
+          width="800"
+          height="800"
+          loading="lazy"
+        >
+      {%- endif -%}
+    </div>
+
+    <!-- Child 4 -->
+    <div class="image-grid-item">
+      {%- if section.settings.image_4 != blank -%}
+        <img
+          src="{{ section.settings.image_4 | image_url: width: 800 }}"
+          alt="Image 4"
+          width="800"
+          height="800"
+          loading="lazy"
+        >
+      {%- endif -%}
+    </div>
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Image Grid (4)",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image_1",
+      "label": "Image 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_2",
+      "label": "Image 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_3",
+      "label": "Image 3"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_4",
+      "label": "Image 4"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Image Grid (4)"
+    }
+  ]
+}
+{% endschema %}
