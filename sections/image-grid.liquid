@@ -1,92 +1,187 @@
 <!-- ========================================
-  IMAGE GRID SECTION (4 IMAGES)
+  RARE STACKED IMAGE SECTION
   ======================================== -->
 <section id="rareImageGrid" class="rare-image-grid">
   <div class="image-grid-main">
 
-    <!-- Child 1 -->
-    <div class="image-grid-item">
-      {%- if section.settings.image_1 != blank -%}
-        <img
-          src="{{ section.settings.image_1 | image_url: width: 800 }}"
-          alt="Image 1"
-          width="800"
-          height="800"
-          loading="lazy"
-        >
-      {%- endif -%}
+    {% comment %} <!-- Level 1 -->
+    <div class="image-level image-level-1">
+      <div class="image-grid-item full-image-item">
+        {%- if section.settings.image_1 != blank -%}
+          <img
+            src="{{ section.settings.image_1 | image_url: width: 1600 }}"
+            alt="Level 1 Image"
+            width="1600"
+            height="900"
+            loading="lazy"
+          >
+        {%- endif -%}
+      </div>
+    </div> {% endcomment %}
+
+    <!-- Level 2 -->
+    <div class="image-level image-level-2">
+      <div class="image-grid-item level-2-image">
+        {%- if section.settings.image_2 != blank -%}
+          <img
+            src="{{ section.settings.image_2 | image_url: width: 1200 }}"
+            alt="Level 2 Image"
+            width="1200"
+            height="900"
+            loading="lazy"
+          >
+        {%- endif -%}
+      </div>
+
+      {% comment %} <div class="image-grid-item level-2-content">
+        <div class="level-2-content-inner">
+          <p>{{ section.settings.overlay_text }}</p>
+
+          {%- if section.settings.overlay_button_label != blank -%}
+            <a
+              href="{{ section.settings.overlay_button_link | default: '#' }}"
+              class="image-grid-overlay-button">
+              {{ section.settings.overlay_button_label }}
+            </a>
+          {%- endif -%}
+        </div>
+      </div> {% endcomment %}
     </div>
 
-    <!-- Child 2 -->
-    <div class="image-grid-item">
-      {%- if section.settings.image_2 != blank -%}
-        <img
-          src="{{ section.settings.image_2 | image_url: width: 800 }}"
-          alt="Image 2"
-          width="800"
-          height="800"
-          loading="lazy"
-        >
-      {%- endif -%}
+    <!-- Level 3 -->
+    <div class="image-level image-level-3">
+      <div class="level-3-section-wrap">
+
+        <div class="image-grid-item level-3-image">
+          {%- if section.settings.image_3 != blank -%}
+            <img
+              src="{{ section.settings.image_3 | image_url: width: 1200 }}"
+              alt="Level 3 Image"
+              width="1200"
+              height="1200"
+              loading="lazy"
+            >
+          {%- endif -%}
+        </div>
+
+        <div class="image-grid-item level-3-content">
+          <div class="level-3-content-inner">
+            <p>{{ section.settings.level_3_text }}</p>
+
+            {%- if section.settings.level_3_button_label != blank -%}
+              <a
+                href="{{ section.settings.level_3_button_link | default: '#' }}"
+                class="level-3-button">
+                {{ section.settings.level_3_button_label }}
+              </a>
+            {%- endif -%}
+          </div>
+        </div>
+
+      </div>
     </div>
 
-    <!-- Child 3 -->
-    <div class="image-grid-item">
-      {%- if section.settings.image_3 != blank -%}
-        <img
-          src="{{ section.settings.image_3 | image_url: width: 800 }}"
-          alt="Image 3"
-          width="800"
-          height="800"
-          loading="lazy"
-        >
-      {%- endif -%}
+    <!-- Level 4 -->
+    <div class="image-level image-level-4">
+      <div class="image-grid-item full-image-item">
+        {%- if section.settings.image_4 != blank -%}
+          <img
+            src="{{ section.settings.image_4 | image_url: width: 1600 }}"
+            alt="Level 4 Image"
+            width="1600"
+            height="900"
+            loading="lazy"
+          >
+        {%- endif -%}
+      </div>
     </div>
-
-    <!-- Child 4 -->
-    <div class="image-grid-item">
-      {%- if section.settings.image_4 != blank -%}
-        <img
-          src="{{ section.settings.image_4 | image_url: width: 800 }}"
-          alt="Image 4"
-          width="800"
-          height="800"
-          loading="lazy"
-        >
-      {%- endif -%}
+    <!-- Level 4 -->
+    <div class="image-level image-level-4">
+      <div class="image-grid-item full-image-item">
+        {%- if section.settings.image_5 != blank -%}
+          <img
+            src="{{ section.settings.image_5 | image_url: width: 1600 }}"
+            alt="Level 4 Image"
+            width="1600"
+            height="900"
+            loading="lazy"
+          >
+        {%- endif -%}
+      </div>
     </div>
 
   </div>
 </section>
 
+
+
 {% schema %}
 {
-  "name": "Image Grid (4)",
+  "name": "Rare Image Stack",
   "settings": [
     {
       "type": "image_picker",
       "id": "image_1",
-      "label": "Image 1"
+      "label": "Level 1 Image"
     },
     {
       "type": "image_picker",
       "id": "image_2",
-      "label": "Image 2"
+      "label": "Level 2 Image"
     },
     {
       "type": "image_picker",
       "id": "image_3",
-      "label": "Image 3"
+      "label": "Level 3 Image"
     },
     {
       "type": "image_picker",
       "id": "image_4",
-      "label": "Image 4"
+      "label": "Level 4 Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_5",
+      "label": "Level 5 Image"
+    },
+    {
+      "type": "text",
+      "id": "overlay_text",
+      "label": "Level 2 Text",
+      "default": "OWN THE FIRST RARE TRAVEL DROP"
+    },
+    {
+      "type": "text",
+      "id": "overlay_button_label",
+      "label": "Level 2 Button Label",
+      "default": "Prebook Now"
+    },
+    {
+      "type": "url",
+      "id": "overlay_button_link",
+      "label": "Level 2 Button Link"
+    },
+    {
+      "type": "text",
+      "id": "level_3_text",
+      "label": "Level 3 Text",
+      "default": "OWN THE FIRST RARE TRAVEL DROP"
+    },
+    {
+      "type": "text",
+      "id": "level_3_button_label",
+      "label": "Level 3 Button Label",
+      "default": "Shop now"
+    },
+    {
+      "type": "url",
+      "id": "level_3_button_link",
+      "label": "Level 3 Button Link"
     }
   ],
   "presets": [
     {
-      "name": "Image Grid (4)"
+      "name": "Rare Image Stack"
     }
   ]
 }

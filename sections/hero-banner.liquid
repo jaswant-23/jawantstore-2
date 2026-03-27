@@ -1,15 +1,17 @@
-<!-- ========================================
-  HERO BANNER SECTION
-======================================== -->
+<!--
+  ========================================
+    HERO BANNER SECTION
+  ========================================
+-->
 <section id="rareHeroBanner" class="rare-hero-banner">
   <div id="rareHero-main" class="rareHero-main">
-
     <div class="hero-upper">
-
       <!-- Desktop Heading -->
-      <div class="uper-content-desktop">
-        <h3>{{ section.settings.desktop_heading }}</h3>
-      </div>
+      {% comment %}
+        <div class="uper-content-desktop">
+          <h3>{{ section.settings.desktop_heading }}</h3>
+        </div>
+      {% endcomment %}
 
       <!-- Mobile Overlay Content -->
       <div class="uper-content-mobile">
@@ -31,30 +33,38 @@
 
       <!-- Hero Image -->
       <div class="hero-image">
-        {%- if section.settings.hero_image_desktop != blank -%}
-          <img
-            src="{{ section.settings.hero_image_desktop | image_url: width: 1800 }}"
-            alt="{{ section.settings.hero_title | escape }}"
-            width="1800"
-            height="1000"
-            loading="eager"
-            class="hero-image-desktop">
-        {%- endif -%}
+        <picture>
+          {%- if section.settings.hero_image_mobile != blank -%}
+            <source
+              media="(max-width: 768px)"
+              srcset="{{ section.settings.hero_image_mobile | image_url: width: 900 }}"
+            >
+          {%- endif -%}
 
-        {%- if section.settings.hero_image_mobile != blank -%}
-          <img
-            src="{{ section.settings.hero_image_mobile | image_url: width: 900 }}"
-            alt="{{ section.settings.hero_title | escape }}"
-            width="900"
-            height="1200"
-            loading="eager"
-            class="hero-image-mobile">
-        {%- endif -%}
+          {%- if section.settings.hero_image_desktop != blank -%}
+            <img
+              src="{{ section.settings.hero_image_desktop | image_url: width: 1800 }}"
+              alt="{{ section.settings.hero_title | escape }}"
+              width="1800"
+              height="1000"
+              loading="eager"
+              class="hero-image-main"
+            >
+          {%- elsif section.settings.hero_image_mobile != blank -%}
+            <img
+              src="{{ section.settings.hero_image_mobile | image_url: width: 900 }}"
+              alt="{{ section.settings.hero_title | escape }}"
+              width="900"
+              height="1200"
+              loading="eager"
+              class="hero-image-main"
+            >
+          {%- endif -%}
+        </picture>
       </div>
     </div>
 
     <div class="hero-lower">
-
       <!-- First Row -->
       <div class="hero-lower1">
         <div class="lower-content1">
@@ -68,7 +78,8 @@
               alt="Lower card image 2"
               width="1200"
               height="700"
-              loading="lazy">
+              loading="lazy"
+            >
           {%- endif -%}
         </div>
       </div>
@@ -82,7 +93,8 @@
               alt="Lower card image 3"
               width="900"
               height="700"
-              loading="lazy">
+              loading="lazy"
+            >
           {%- endif -%}
         </div>
 
@@ -93,17 +105,17 @@
               alt="Lower card image 4"
               width="900"
               height="700"
-              loading="lazy">
+              loading="lazy"
+            >
           {%- endif -%}
         </div>
 
         <div class="lower-content5">
+          <span class="try-buy-number">14</span>
           <p>{{ section.settings.lower_text }}</p>
         </div>
       </div>
-
     </div>
-
   </div>
 </section>
 

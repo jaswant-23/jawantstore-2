@@ -1,115 +1,162 @@
-<!-- ========================================
+<!--
+  ========================================
   HEADER SECTION
-  ======================================== -->
+  ========================================
+-->
+
 <!-- Top Bar -->
 <div class="top-bar">
   {{ section.settings.top_bar_text }}
 </div>
 
-<!-- Navbar -->
-<nav class="navbar">
-  <div class="nav-inner">
+<!-- Main Header -->
+<header class="site-header">
+  <nav class="navbar">
+    <div class="nav-inner">
+      <!-- Logo -->
+      <a href="{{ routes.root_url }}" class="logo">
+        {%- if section.settings.logo != blank -%}
+          {{
+            section.settings.logo
+            | image_url: width: 220
+            | image_tag: alt: shop.name, width: 220, height: 60, loading: 'eager'
+          }}
+        {%- else -%}
+          <img
+            src="{{ 'hero_image.jpg' | asset_url }}"
+            alt="{{ shop.name | escape }}"
+            width="220"
+            height="60"
+            loading="eager"
+          >
+        {%- endif -%}
+      </a>
 
-    <!-- Logo -->
-    <a href="{{ routes.root_url }}" class="logo">
+      <!-- Desktop Menu -->
+      <ul class="menu" id="mobileMenu">
+        {%- for link in linklists[section.settings.menu].links -%}
+          <li>
+            <a href="{{ link.url }}">{{ link.title | upcase }}</a>
+          </li>
+        {%- else -%}
+          <li><a href="{{ routes.root_url }}">HOME</a></li>
+          <li><a href="{{ routes.collections_url }}/bestsellers">BESTSELLERS</a></li>
+          <li><a href="{{ routes.collections_url }}/all">ALL COLLECTION</a></li>
+          <li><a href="{{ routes.collections_url }}/hrx">HRX</a></li>
+          <li><a href="{{ routes.collections_url }}/sets">SHOP BY SETS</a></li>
+          <li><a href="{{ routes.collections_url }}/durable-picks">DURABLE PICKS</a></li>
+          <li><a href="{{ routes.root_url }}pages/contact">CONTACT</a></li>
+          <li><a href="{{ routes.root_url }}pages/about-us">ABOUT US</a></li>
+          <li><a href="{{ routes.root_url }}blogs/news">NEWS</a></li>
+          <li><a href="{{ routes.root_url }}wishlist">MY WISHLIST</a></li>
+        {%- endfor -%}
+      </ul>
 
-      {%- if section.settings.logo != blank -%}
+      <!-- Icons -->
+      <div class="icons">
+        <a href="{{ routes.search_url }}" class="icon-link" aria-label="Search">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </a>
 
-        {{ section.settings.logo | image_url: width: 200 | image_tag: alt: shop.name, width: 200, height: 52, loading: 'eager'
-        }}
+        <a href="{{ routes.account_url }}" class="icon-link" aria-label="Account">
+          <i class="fa-regular fa-user"></i>
+        </a>
 
-      {%- else -%}
+        <a href="{{ routes.cart_url }}" class="icon-link cart-icon-link" aria-label="Cart">
+          <i class="fa-solid fa-bag-shopping"></i>
+          {%- if cart.item_count > 0 -%}
+            <span class="cart-count">{{ cart.item_count }}</span>
+          {%- endif -%}
+        </a>
+      </div>
 
-        <img
-          src="{{ '' | asset_url }}"
-          alt="{{ shop.name | escape }}"
-          width="200"
-          height="52"
-          loading="eager">
+      <!-- Hamburger -->
+      <button class="menu-toggle" type="button" aria-label="Toggle Menu" onclick="toggleMenu()">
+        <i class="fa-solid fa-bars" id="menuIcon"></i>
+      </button>
+    </div>
+  </nav>
 
-      {%- endif -%}
+  <!-- Delivery Bar -->
+  <div class="delivery-bar">
+    <div class="delivery-bar-inner" onclick="togglePincodeBar()">
+      <span class="delivery-icon">
+        <i class="fa-solid fa-location-dot"></i>
+      </span>
 
-    </a>
+      <span class="delivery-text">
+        {{ section.settings.delivery_bar_text }}
+      </span>
 
-    <!-- Desktop Menu -->
-    <ul class="menu" id="mobileMenu">
-      {%- for link in linklists[section.settings.menu].links -%}
-        <li>
-          <a href="{{ link.url }}">{{ link.title | upcase }}</a>
-        </li>
-      {%- else -%}
-        <li>
-          <a href="{{ routes.root_url }}">HOME</a>
-        </li>
-        <li>
-          <a href="{{ routes.collections_url }}/bestsellers">BESTSELLERS</a>
-        </li>
-        <li>
-          <a href="{{ routes.collections_url }}/all">ALL COLLECTION</a>
-        </li>
-        <li>
-          <a href="{{ routes.collections_url }}/hrx">HRX</a>
-        </li>
-        <li>
-          <a href="{{ routes.collections_url }}/sets">SHOP BY SETS</a>
-        </li>
-        <li>
-          <a href="{{ routes.collections_url }}/durable-picks">DURABLE PICKS</a>
-        </li>
-        <li>
-          <a href="{{ routes.root_url }}pages/contact">CONTACT</a>
-        </li>
-        <li>
-          <a href="{{ routes.root_url }}pages/about-us">ABOUT US</a>
-        </li>
-        <li>
-          <a href="{{ routes.root_url }}blogs/news">NEWS</a>
-        </li>
-        <li>
-          <a href="{{ routes.root_url }}wishlist">MY WISHLIST</a>
-        </li>
-      {%- endfor -%}
-    </ul>
-
-    <!-- Icons -->
-    <div class="icons">
-      <i class="fa-solid fa-magnifying-glass" onclick="searchProduct()"></i>
-      <i class="fa-regular fa-user" onclick="openUser()"></i>
-      <i class="fa-solid fa-bag-shopping" onclick="openCart()"></i>
+      <span class="delivery-arrow" id="deliveryArrow">
+        <i class="fa-solid fa-chevron-down"></i>
+      </span>
     </div>
 
-    <!-- Hamburger Toggle -->
-    <div class="menu-toggle" onclick="toggleMenu()">
-      <i class="fa-solid fa-bars" id="menuIcon"></i>
+    <div class="delivery-dropdown" id="deliveryDropdown">
+      <div class="delivery-dropdown-inner">
+        <input
+          type="text"
+          id="pincodeInput"
+          class="delivery-input"
+          placeholder="Enter Pincode"
+          maxlength="6"
+        >
+        <button type="button" class="delivery-check-btn">CHECK</button>
+      </div>
     </div>
-
   </div>
-</nav>
+</header>
+
+{% comment %} <script>
+  function toggleMenu() {
+    var menu = document.getElementById('mobileMenu');
+    var icon = document.getElementById('menuIcon');
+
+    menu.classList.toggle('active');
+
+    if (menu.classList.contains('active')) {
+      icon.classList.remove('fa-bars');
+      icon.classList.add('fa-xmark');
+    } else {
+      icon.classList.remove('fa-xmark');
+      icon.classList.add('fa-bars');
+    }
+  }
+</script> {% endcomment %}
 
 {% schema %}
-  {
-    "name": "Header",
-    "settings": [
-      {
-        "type": "text",
-        "id": "top_bar_text",
-        "label": "Top Bar Message",
-        "default": "GET EXTRA 10% OFF | USE : FIRSTESCAPE"
-      }, {
-        "type": "image_picker",
-        "id": "logo",
-        "label": "Logo Image"
-      }, {
-        "type": "link_list",
-        "id": "menu",
-        "label": "Navigation Menu",
-        "default": "main-menu"
-      }
-    ],
-    "presets": [
-      {
-        "name": "Header"
-      }
-    ]
-  }
+{
+  "name": "Header",
+  "settings": [
+    {
+      "type": "text",
+      "id": "top_bar_text",
+      "label": "Top Bar Message",
+      "default": "Get Extra 10% Off | Use : FIRSTESCAPE"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo Image"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Navigation Menu",
+      "default": "main-menu"
+    },
+    {
+      "type": "text",
+      "id": "delivery_bar_text",
+      "label": "Delivery Bar Text",
+      "default": "Please enter pincode to check delivery timelines"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Header"
+    }
+  ]
+}
 {% endschema %}

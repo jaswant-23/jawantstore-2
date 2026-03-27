@@ -13,49 +13,62 @@
       "type": "hero-banner",
       "settings": {
         "desktop_heading": "would you like new wheels?",
-        "hero_subtitle": "A new luggage collection is arriving",
+        "hero_image_desktop": "shopify://shop_images/escCar.png",
+        "hero_image_mobile": "shopify://shop_images/escCar_Mobile.png",
+        "hero_subtitle": "Introducing",
         "hero_title": "RARE TRAVEL",
-        "hero_coming_soon_text": "COMING SOON",
+        "hero_coming_soon_text": "YEARS WARRENTY",
         "notify_box_heading": "First 100 travellers get special Rare freebies worth up to 5K",
         "button_label": "Prebook Now",
         "second_page_url": "shopify://collections/frontpage",
-        "lower_text": "A new luggage collection is arriving"
+        "lower_text": "DAYS TRY & BUY",
+        "lower_card_image_2": "shopify://shop_images/C_1.png",
+        "lower_card_image_3": "shopify://shop_images/ChatGPT-Image-Mar-13_-2026_-06_28_16-PM_2.png",
+        "lower_card_image_4": "shopify://shop_images/Group_6_34855.png"
       }
     },
     "luggage-showcase": {
       "type": "luggage-showcase",
       "blocks": {
-        "product-card-1": {
+        "product_card_4HPLNN": {
           "type": "product_card",
           "settings": {
+            "product_image": "shopify://shop_images/Group_1410082586.png",
             "product_title": "GALLARDO",
             "product_description": "A sculpted hard shell luggage built for the modern Indian traveller.",
             "finish_text": "Carbon Black",
+            "thumb_1": "shopify://shop_images/80_1.png",
+            "thumb_2": "shopify://shop_images/80_1.png",
+            "thumb_3": "shopify://shop_images/80_1.png",
+            "active_thumbnail": "thumb_1",
             "size_1": "Cabin",
             "size_2": "Medium",
             "size_3": "Large",
             "size_4": "Cabin + Medium",
             "size_5": "Cabin + Medium + Large",
-            "active_thumbnail": "thumb_1",
             "active_size": "size_3",
             "price_text": "₹8,999",
             "price_note": "Delivery in 5-7 days | Inclusive of all taxes",
             "button_label": "Prebook now",
-            "button_link": "shopify://collections/frontpage"
+            "button_link": ""
           }
         },
         "product-card-2": {
           "type": "product_card",
           "settings": {
+            "product_image": "shopify://shop_images/80_1.png",
             "product_title": "TONY",
             "product_description": "A textured matte luggage collection with signature gold detailing.",
             "finish_text": "Carbon Black",
+            "thumb_1": "shopify://shop_images/80_1.png",
+            "thumb_2": "shopify://shop_images/80_1.png",
+            "thumb_3": "shopify://shop_images/80_1.png",
+            "active_thumbnail": "thumb_1",
             "size_1": "Cabin",
             "size_2": "Medium",
             "size_3": "Large",
             "size_4": "Cabin + Medium",
             "size_5": "Cabin + Medium + Large",
-            "active_thumbnail": "thumb_1",
             "active_size": "size_3",
             "price_text": "₹8,999",
             "price_note": "Delivery in 5-7 days | Inclusive of all taxes",
@@ -65,7 +78,7 @@
         }
       },
       "block_order": [
-        "product-card-1",
+        "product_card_4HPLNN",
         "product-card-2"
       ],
       "settings": {}
@@ -73,20 +86,21 @@
     "image-grid": {
       "type": "image-grid",
       "settings": {
-        "image_1": "",
-        "image_2": "",
-        "image_3": "",
-        "image_4": ""
+        "image_2": "shopify://shop_images/baner3.webp",
+        "image_3": "shopify://shop_images/Desktop-1.png",
+        "image_4": "shopify://shop_images/Screenshot_2026-03-16_at_12.44.04_PM_1.png",
+        "image_5": "shopify://shop_images/baner4.webp",
+        "overlay_text": "OWN THE FIRST RARE TRAVEL DROP",
+        "overlay_button_label": "Prebook Now",
+        "overlay_button_link": "",
+        "level_3_text": "OWN THE FIRST RARE TRAVEL DROP",
+        "level_3_button_label": "Shop now",
+        "level_3_button_link": ""
       }
     },
     "four-image-grid": {
       "type": "four-image-grid",
-      "settings": {
-        "image_1": "",
-        "image_2": "",
-        "image_3": "",
-        "image_4": ""
-      }
+      "settings": {}
     }
   },
   "order": [
