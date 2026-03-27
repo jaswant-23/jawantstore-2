@@ -1,7 +1,6 @@
 <!-- ========================================
      FOOTER SECTION
 ======================================== -->
-
 <div class="footer">
   <div class="footer-top">
 
@@ -17,14 +16,13 @@
         >
       {%- else -%}
         <img
-          src="{{ 'Logo.png' | asset_url }}"
+          src="{{ 'hero_image.jpg' | asset_url }}"
           alt="{{ shop.name | escape }}"
           loading="lazy"
           width="200"
           height="auto"
         >
       {%- endif -%}
-
       {%- if section.settings.footer_tagline != blank -%}
         <p class="footer-tagline">
           {{ section.settings.footer_tagline | escape }}
@@ -33,82 +31,90 @@
     </div>
 
     <!-- Know More Column -->
-    <div class="footer-col">
+    <div class="footer-col footer-col--accordion" data-accordion>
       {%- if section.settings.col1_heading != blank -%}
-        <h3>{{ section.settings.col1_heading | escape }}</h3>
+        <h3 class="footer-col__heading" data-accordion-trigger>
+          {{ section.settings.col1_heading | escape }}
+          <span class="footer-col__icon" aria-hidden="true"></span>
+        </h3>
       {%- endif -%}
-
-      {%- assign col1_links = linklists[section.settings.col1_menu].links -%}
-      {%- if col1_links != blank -%}
-        {%- for link in col1_links -%}
-          <a href="{{ link.url }}">{{ link.title | escape }}</a>
-        {%- endfor -%}
-      {%- else -%}
-        <a href="{{ routes.root_url }}">Home</a>
-        <a href="/pages/about-us">About us</a>
-        <a href="/pages/warranty">Warranty</a>
-        <a href="/pages/contact">Contact</a>
-        <a href="/blogs/news">News</a>
-        <a href="/blogs/blog">Blog</a>
-      {%- endif -%}
+      <div class="footer-col__body" data-accordion-body>
+        {%- assign col1_links = linklists[section.settings.col1_menu].links -%}
+        {%- if col1_links != blank -%}
+          {%- for link in col1_links -%}
+            <a href="{{ link.url }}">{{ link.title | escape }}</a>
+          {%- endfor -%}
+        {%- else -%}
+          <a href="{{ routes.root_url }}">Home</a>
+          <a href="/pages/about-us">About us</a>
+          <a href="/pages/warranty">Warranty</a>
+          <a href="/pages/contact">Contact</a>
+          <a href="/blogs/news">News</a>
+          <a href="/blogs/blog">Blog</a>
+        {%- endif -%}
+      </div>
     </div>
 
     <!-- Help Column -->
-    <div class="footer-col">
+    <div class="footer-col footer-col--accordion" data-accordion>
       {%- if section.settings.col2_heading != blank -%}
-        <h3>{{ section.settings.col2_heading | escape }}</h3>
+        <h3 class="footer-col__heading" data-accordion-trigger>
+          {{ section.settings.col2_heading | escape }}
+          <span class="footer-col__icon" aria-hidden="true"></span>
+        </h3>
       {%- endif -%}
-
-      {%- assign col2_links = linklists[section.settings.col2_menu].links -%}
-      {%- if col2_links != blank -%}
-        {%- for link in col2_links -%}
-          <a href="{{ link.url }}">{{ link.title | escape }}</a>
-        {%- endfor -%}
-      {%- else -%}
-        <a href="/pages/order-tracking">Order Tracking</a>
-        <a href="/pages/return-order">Return Order</a>
-        <a href="/policies/terms-of-service">Terms of service</a>
-        <a href="/policies/privacy-policy">Privacy Policy</a>
-        <a href="/policies/refund-policy">Returns and Refund Policy</a>
-        <a href="/pages/grievance-policy">Grievance Policy</a>
-      {%- endif -%}
+      <div class="footer-col__body" data-accordion-body>
+        {%- assign col2_links = linklists[section.settings.col2_menu].links -%}
+        {%- if col2_links != blank -%}
+          {%- for link in col2_links -%}
+            <a href="{{ link.url }}">{{ link.title | escape }}</a>
+          {%- endfor -%}
+        {%- else -%}
+          <a href="/pages/order-tracking">Order Tracking</a>
+          <a href="/pages/return-order">Return Order</a>
+          <a href="/policies/terms-of-service">Terms of service</a>
+          <a href="/policies/privacy-policy">Privacy Policy</a>
+          <a href="/policies/refund-policy">Returns and Refund Policy</a>
+          <a href="/pages/grievance-policy">Grievance Policy</a>
+        {%- endif -%}
+      </div>
     </div>
 
     <!-- Contact Column -->
-    <div class="footer-col footer-contact-col">
+    <div class="footer-col footer-col--accordion footer-contact-col" data-accordion>
       {%- if section.settings.col3_heading != blank -%}
-        <h3>{{ section.settings.col3_heading | escape }}</h3>
+        <h3 class="footer-col__heading" data-accordion-trigger>
+          {{ section.settings.col3_heading | escape }}
+          <span class="footer-col__icon" aria-hidden="true"></span>
+        </h3>
       {%- endif -%}
-
-      {%- if section.settings.company_name != blank -%}
-        <p class="footer-contact-text footer-company-name">
-          {{ section.settings.company_name | escape }}
-        </p>
-      {%- endif -%}
-
-      {%- if section.settings.company_address != blank -%}
-        <p class="footer-contact-text footer-company-address">
-          {{ section.settings.company_address | newline_to_br }}
-        </p>
-      {%- endif -%}
-
-      {%- if section.settings.company_cin != blank -%}
-        <p class="footer-contact-text footer-company-cin">
-          {{ section.settings.company_cin | escape }}
-        </p>
-      {%- endif -%}
-
-      {%- if section.settings.contact_phone != blank -%}
-        <a href="tel:{{ section.settings.contact_phone | strip }}">
-          Contact Number: {{ section.settings.contact_phone | escape }}
-        </a>
-      {%- endif -%}
-
-      {%- if section.settings.contact_email != blank -%}
-        <a href="mailto:{{ section.settings.contact_email | strip }}">
-          Email ID: {{ section.settings.contact_email | escape }}
-        </a>
-      {%- endif -%}
+      <div class="footer-col__body" data-accordion-body>
+        {%- if section.settings.company_name != blank -%}
+          <p class="footer-contact-text footer-company-name">
+            {{ section.settings.company_name | escape }}
+          </p>
+        {%- endif -%}
+        {%- if section.settings.company_address != blank -%}
+          <p class="footer-contact-text footer-company-address">
+            {{ section.settings.company_address | newline_to_br }}
+          </p>
+        {%- endif -%}
+        {%- if section.settings.company_cin != blank -%}
+          <p class="footer-contact-text footer-company-cin">
+            {{ section.settings.company_cin | escape }}
+          </p>
+        {%- endif -%}
+        {%- if section.settings.contact_phone != blank -%}
+          <a href="tel:{{ section.settings.contact_phone | strip }}">
+            Contact Number: {{ section.settings.contact_phone | escape }}
+          </a>
+        {%- endif -%}
+        {%- if section.settings.contact_email != blank -%}
+          <a href="mailto:{{ section.settings.contact_email | strip }}">
+            Email ID: {{ section.settings.contact_email | escape }}
+          </a>
+        {%- endif -%}
+      </div>
     </div>
 
   </div>
